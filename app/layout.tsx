@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { JetBrains_Mono} from "next/font/google";
 import "./globals.css";
+import MainLayout from "@/layouts/MainLayout";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const jetBrainsMonoSans = JetBrains_Mono({
+  variable: "--font-jetbrains-mono-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetBrainsMonoMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono-mono",
   subsets: ["latin"],
 });
 
@@ -23,11 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scrollbar-none">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${jetBrainsMonoMono.variable} antialiased bg-dark font-mono scrollbar-none`}
       >
+        <MainLayout>
         {children}
+        </MainLayout>
       </body>
     </html>
   );
