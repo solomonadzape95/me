@@ -4,6 +4,7 @@ interface ColorSwatch {
   name: string;
   color: string;
   label: string;
+  description: string;
 }
 
 // Utility to calculate luminance and contrast ratio
@@ -33,16 +34,25 @@ function getContrastColor(bgColor: string) {
 }
 
 const colorSwatches: ColorSwatch[] = [
-  { name: 'bg', color: '#171616', label: 'bg' },
-  { name: 'bg-2', color: '#2a2a2a', label: 'bg-2' },
-  { name: 'bg-3', color: '#3d3d3d', label: 'bg-3' },
-  { name: 'txt-3', color: '#4a5568', label: 'txt-3' },
-  { name: 'txt-2', color: '#718096', label: 'txt-2' },
-  { name: 'txt', color: '#e2e8f0', label: 'txt' },
-  { name: 'txt-0', color: '#f7fafc', label: 'txt-0' },
-  { name: 'pink', color: '#ec4899', label: 'pink' },
-  { name: 'purple', color: '#8b5cf6', label: 'purple' },
-  { name: 'blue', color: '#06b6d4', label: 'blue' },
+  // Background colors
+  { name: 'bg-primary', color: '#171616', label: 'bg', description: 'Primary background (dark theme)' },
+  { name: 'bg-footer', color: '#131313', label: 'bg-2', description: 'Secondary background (footer)' },
+  { name: 'bg-light', color: '#1b1b1b', label: 'bg-3', description: 'Light theme background' },
+  
+  // Text colors
+  { name: 'accent-white', color: '#ffffff', label: 'txt', description: 'Pure white' },
+  { name: 'text-gray', color: '#9ca3af', label: 'txt-2', description: 'Secondary text & borders' },
+  
+  // Border colors
+  { name: 'border-subtle', color: 'rgba(249, 250, 251, 0.2)', label: 'txt-3', description: 'Subtle borders' }
+  
+  // Accent colors
+  ,{ name: 'text-primary', color: '#ededed', label: 'txt-4', description: 'Primary text (dark theme)' },
+  
+  // Magnets colors
+  { name: 'magnets-default', color: 'rgb(248, 250, 252)', label: 'pink', description: 'Magnets default color' },
+  { name: 'magnets-red', color: 'rgb(255, 100, 100)', label: 'red', description: 'Magnets close distance' },
+  { name: 'magnets-blue', color: 'rgb(100, 100, 255)', label: 'blue', description: 'Magnets far distance' },
 ];
 
 export default function ColorPalette() {
@@ -59,19 +69,19 @@ export default function ColorPalette() {
   };
 
   return (
-    <div className="bg-transparent flex items-center justify-center flex-wrap lg:grid lg:grid-cols-10 gap-0 mx-auto lg:mx-0 w-auto ">
+    <div className="bg-transparent flex items-center justify-center flex-wrap gap-0 mx-auto lg:mx-0 w-auto">
       {colorSwatches.map((swatch) => {
         const textColor = getContrastColor(swatch.color);
         return (
           <div
             key={swatch.name}
-            className=""  
+            className=""
           >
             <button
               type="button"
-              className="w-12 h-8 lg:w-16  xl:w-20 xl:h-10 shadow-lg grid place-content-center transition-all duration-150 outline-none border-collapse border border-gray-50/50"
+              className="w-12 h-8 lg:w-16 xl:w-20 xl:h-10 shadow-lg grid place-content-center transition-all duration-150 outline-none border-collapse border border-gray-50/50"
               style={{ backgroundColor: swatch.color, cursor: 'pointer' }}
-              title={`Click to copy: ${swatch.color}`}
+              title={`${swatch.description} - Click to copy: ${swatch.color}`}
               onClick={() => handleCopy(swatch.color, swatch.name)}
             >
               <span

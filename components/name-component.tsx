@@ -36,7 +36,7 @@ export default function NameComponent() {
                         key={i}
                         ref={isCurrent ? letterRef : undefined}
                         style={{
-                            color: isCurrent ? "#888888" : "#fff",
+                            color: isCurrent ? "#9ca3af" : "#fff",
                             transition: "color 0.3s"
                         }}
                         className={isCurrent ? "cursor-pointer relative" : ""}
