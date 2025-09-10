@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 export default function Footer(){
-    return  <footer className="mt-14 mb-2 w-10/12 mx-auto flex items-center flex-col lg:flex-row justify-evenly lg:justify-between border-2 border-gray-50/50 h-[100px] lg:h-[60px] bg-[#131313] font-mono px-4">
+    return  <footer className="mt-14 mb-2 w-11/12 mx-auto flex items-center flex-col lg:flex-row justify-evenly lg:justify-between border-2 border-gray-50/50 h-[100px] lg:h-[60px] bg-[#131313] font-mono px-4">
     <section className="flex items-center divide-x-[1px] space-x-4">
       <span className="text-xs flex items-center gap-2 pr-4">
        <ChevronLeftIcon className="w-4 h-4 cursor-pointer text-gray-400 hover:text-white duration-300"/> webrings:cpt <ChevronRightIcon  className="w-4 h-4 cursor-pointer text-gray-400 hover:text-white duration-300"/>

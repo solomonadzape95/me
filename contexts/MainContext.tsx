@@ -5,12 +5,16 @@ import React, { useContext, createContext, useState, useEffect } from "react"
 interface ContextProps {
     regionalTime: String | null
     updatedAt: number
+    isWindowOpen: boolean
+    setWindowOpen: (open: boolean) => void
 }
 const MainContext = createContext<ContextProps | null>(null)
 
 export const MainContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [regionalTime, setRegionalTime] = useState<String | null>(null)
-    let updatedAt
+    const [isWindowOpen, setIsWindowOpen] = useState<boolean>(false)
+    const [updatedAt, setUpdatedAt] = useState<number>(Date.now())
+    
     const findLocalTime = () => {
         const d = new Date()
         const offset = +1;
@@ -23,16 +27,30 @@ export const MainContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         const timeString = date.toLocaleTimeString([], { hour12: false });
         console.log(timeString);
         return timeString;
-
     }
-    useEffect(() => {
-        if (updatedAt && updatedAt - Date.now() <= 300000) return
+
+    const updateTime = () => {
         const time = findLocalTime();
-        setRegionalTime(time)
-    })
+        setRegionalTime(time);
+        setUpdatedAt(Date.now());
+    }
+
+    useEffect(() => {
+        // Initial time update
+        updateTime();
+        
+        // Set up interval to update every 5 minutes (300000 ms)
+        const interval = setInterval(updateTime, 300000);
+        
+        // Cleanup interval on unmount
+        return () => clearInterval(interval);
+    }, [])
+
     const contextValue: ContextProps = {
         regionalTime: regionalTime,
-        updatedAt: updatedAt || Date.now()
+        updatedAt: updatedAt,
+        isWindowOpen: isWindowOpen,
+        setWindowOpen: setIsWindowOpen
     };
 
     return (

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono} from "next/font/google";
 import "./globals.css";
-import MainLayout from "@/layouts/MainLayout";
 
 const jetBrainsMonoSans = JetBrains_Mono({
   variable: "--font-jetbrains-mono-sans",
@@ -28,9 +27,7 @@ export default function RootLayout({
       <body
         className={`${jetBrainsMonoMono.variable} antialiased bg-dark font-mono scrollbar-none`}
       >
-        <MainLayout>
-        {children}
-        </MainLayout>
+        {children} 
       </body>
     </html>
   );

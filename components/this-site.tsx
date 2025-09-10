@@ -1,6 +1,6 @@
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
 import ColorPalette from "./color-palette";
-export default function ThisSite() {
+export default function zThisSite() {
     return (
         <div className="mt-5 py-10">
        <span className="flex items-center justify-between gap-2"><h1 className="text-3xl lg:text-4xl">this site</h1> </span>
