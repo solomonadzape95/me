@@ -7,7 +7,6 @@ export default function Footer(){
        <ChevronLeftIcon className="w-4 h-4 cursor-pointer text-gray-400 hover:text-white duration-300"/> webrings:cpt <ChevronRightIcon  className="w-4 h-4 cursor-pointer text-gray-400 hover:text-white duration-300"/>
         </span>
       <span className="ml-2 text-xs text-gray-400 pr-4">45 visits</span>
-      <span className="ml-2 text-xs text-gray-400">300 guesses</span>
     </section>
 
     <section className="flex items-center divide-x-[1px] space-x-4">

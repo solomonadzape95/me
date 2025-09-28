@@ -2,6 +2,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { ArrowLongRightIcon, Bars3Icon, SlashIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { useMain } from "@/contexts/MainContext";
 
 const links: { label: string, href: string }[] = [
     { label: "about", href: "/about" },
@@ -10,17 +11,18 @@ const links: { label: string, href: string }[] = [
 ]
 export default function Header() {
     const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+    const {isWindowOpen} = useMain() as {isWindowOpen :boolean}
     const pathname = usePathname();
     const router = useRouter();
     const isActive = (path: string) => pathname === path;
-    return <header className="flex items-center justify-between bg-transparent backdrop-blur-xl py-4 sticky top-0 left-0 right-0 z-10 font-mono">
-        <section className="flex items-center justify-between w-11/12 mx-auto backdrop-blur-xl">
+    return <header className={`flex items-center justify-between bg-background py-5 sticky top-0 left-0 right-0 z-50 font-mono ${isWindowOpen ? "brightness-100" : "brightness-75"}`}>
+        <section className="flex items-center justify-between w-11/12 mx-auto bg-transparent">
             <span className="text-2xl flex items-center gap-2">
                 <span onClick={() => { router.push("/") }} className="cursor-pointer">~</span>{pathname === "/" ? "" : pathname} /<span className="w-3 h-6 inline-block bg-white animate-pulse"></span>
             </span>
             <nav className="items-center gap-8 text-white text-2xl hidden lg:flex">
                 {links.map((link) => (
-                    <span key={link.href} className={`cursor-pointer group relative flex items-center gap-0 ${isActive(link.href) ? "font-bold" : "font-light"}`} onClick={() => { router.push(link.href) }}>
+                    <span key={link.href} className={`cursor-pointer group relative flex items-center gap-0 ${isActive(link.href) ? "font-bold" : "font-thin"}`} onClick={() => { router.push(link.href) }}>
                         <SlashIcon className="w-6 h-8 transition-transform duration-300 opacity-100 group-hover:opacity-0 group-hover:rotate-70 inline-block absolute left-0" />
                         <ArrowLongRightIcon className="w-4 h-8 transition-transform duration-300 -rotate-70 opacity-0 group-hover:inline-block group-hover:opacity-100 group-hover:rotate-0" />
                         <span className="">{link.label}</span>
@@ -45,7 +47,7 @@ export default function Header() {
             {isMobileNavOpen && (
                
                    
-                    <nav className="animate-fade-in absolute w-full h-screen inset-0 bg-black/90 top-18 scroll-none z-10 flex flex-col items-start lg:hidden inline-block">
+                    <nav className="animate-fade-in absolute w-full h-screen inset-0 bg-black/90 backdrop-blur-sm top-18 scroll-none z-10 flex flex-col items-start lg:hidden inline-block">
                     <style>{`
                         body {
                             overflow: hidden !important;

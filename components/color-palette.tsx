@@ -48,9 +48,6 @@ const colorSwatches: ColorSwatch[] = [
   
   // Accent colors
   ,{ name: 'text-primary', color: '#ededed', label: 'txt-4', description: 'Primary text (dark theme)' },
-  
-  // Magnets colors
-  { name: 'magnets-default', color: 'rgb(248, 250, 252)', label: 'pink', description: 'Magnets default color' },
   { name: 'magnets-red', color: 'rgb(255, 100, 100)', label: 'red', description: 'Magnets close distance' },
   { name: 'magnets-blue', color: 'rgb(100, 100, 255)', label: 'blue', description: 'Magnets far distance' },
 ];

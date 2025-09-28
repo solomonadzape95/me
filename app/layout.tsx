@@ -24,6 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scrollbar-none">
+      <head>
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="eec0ba25-604f-4991-ab62-eb9a1c7446f1"></script>
+      </head>
       <body
         className={`${jetBrainsMonoMono.variable} antialiased bg-dark font-mono scrollbar-none`}
       >

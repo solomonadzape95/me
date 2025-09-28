@@ -12,7 +12,14 @@ const MainContext = createContext<ContextProps | null>(null)
 
 export const MainContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [regionalTime, setRegionalTime] = useState<String | null>(null)
-    const [isWindowOpen, setIsWindowOpen] = useState<boolean>(false)
+    const [isWindowOpen, setIsWindowOpen] = useState<boolean>(() => {
+        // Initialize from localStorage if available
+        if (typeof window !== 'undefined') {
+            const stored = localStorage.getItem("window")
+            return stored === 'true'
+        }
+        return false
+    })
     const [updatedAt, setUpdatedAt] = useState<number>(Date.now())
     
     const findLocalTime = () => {
@@ -34,7 +41,12 @@ export const MainContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         setRegionalTime(time);
         setUpdatedAt(Date.now());
     }
-
+    const handleWindowOpen = (value : boolean) => {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem("window", String(value))
+        }
+        setIsWindowOpen(value)
+    }
     useEffect(() => {
         // Initial time update
         updateTime();
@@ -50,7 +62,7 @@ export const MainContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         regionalTime: regionalTime,
         updatedAt: updatedAt,
         isWindowOpen: isWindowOpen,
-        setWindowOpen: setIsWindowOpen
+        setWindowOpen: handleWindowOpen
     };
 
     return (
