@@ -44,7 +44,8 @@ export default function Projects() {
       const db = b.date ? Date.parse(b.date) : 0;
       return db - da;
     });
-  } catch (_) {
+  } catch (e) {
+    console.log(e)
     items = [];
   }
 

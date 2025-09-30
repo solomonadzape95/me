@@ -83,7 +83,7 @@ export default function QuickJobsHome() {
         let top = rect.top - modalHeight - padding;
         let left = rect.left;
 
-        let transform = "";
+        const transform = "";
 
         // If not enough space above, show below
         if (top < 0) {
