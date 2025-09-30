@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { SlashIcon, XMarkIcon, CalendarIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline";
-import img from "@/assets/purple-white.png";
+import lintern from "@/assets/lintern.svg";
+import accave from "@/assets/accave.png"
+import vendeor from "@/assets/logo.png"
 
 const jobs: {
   label: string;
@@ -14,35 +16,34 @@ const jobs: {
 }[] = [
   {
     label: "Lintern",
-    href: "https://www.linuxfoundation.org/",
-    logo: img.src,
+    href: "https://www.lintern.tech/",
+    logo: lintern.src,
     description:
-      "I was fortunate to contribute to some of the biggest open-source projects in the world, including the Linux kernel.",
-    title: "Software Engineer 2",
-    startDate: "2021",
+      "I will be responsible for building, managing, and providing initial support for the Lintern application.",
+    title: "Founding Engineer",
+    startDate: "2025",
     endDate: "Present",
   },
   {
     label: "Vendeor",
-    href: "https://archlinux.org/",
-    logo: img.src,
+    href: "https://vendeor.ng/",
+    logo: vendeor.src,
     description:
-      "I was fortunate to contribute to some of the biggest open-source projects in the world, including the Linux kernel.",
-    title: "Software Engineer 2",
-    startDate: "2021",
-    endDate: "2023",
+      "Led and contributed to the development of Vendeor's MVP, collaborating closely with the engineering team.",
+    title: "Founding Engineer",
+    startDate: "2024",
+    endDate: "2025",
   },
   {
     label: "Accave",
-    href: "https://www.un.org/",
-    logo: img.src,
+    href: "https://www.accave.com",
+    logo: accave.src,
     description:
-      "I was fortunate to contribute to some of the biggest open-source projects in the world, including the Linux kernel.",
-    title: "Software Engineer 2",
-    startDate: "2021",
-    endDate: "2023",
-  },
-];
+      "Produced educational content and infographics to enhance user engagement and learning on the Accave platform.",
+    title: "Creative Technologist",
+    startDate: "2023",
+    endDate: "2025",
+  },]
 
 export default function QuickJobsHome() {
   const [openModal, setOpenModal] = useState<null | string>(null);

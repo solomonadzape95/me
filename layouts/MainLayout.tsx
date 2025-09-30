@@ -1,13 +1,14 @@
 "use client"
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { MainContextProvider, useMain } from "@/contexts/MainContext";
+import { useMain } from "@/contexts/MainContext";
+import { RouteChangeLayout } from "./RouteChange";
 
 function LayoutContent({children}: {children: React.ReactNode}) {
-    const { isWindowOpen } = useMain() as { isWindowOpen: boolean };
 
+    const { isWindowOpen } = useMain() as { isWindowOpen: boolean };
     return (
         <div className={`scrollbar-none transition-all duration-500 ease-in-out ${
             isWindowOpen ? 'brightness-100' : 'brightness-75'
@@ -23,8 +24,8 @@ function LayoutContent({children}: {children: React.ReactNode}) {
 
 export default function MainLayout({children}: {children: React.ReactNode}) {
     return (
-        <MainContextProvider>
-            <LayoutContent>{children}</LayoutContent>
-        </MainContextProvider>
+    <RouteChangeLayout>
+        <LayoutContent>{children}</LayoutContent>
+    </RouteChangeLayout>
     )
 }

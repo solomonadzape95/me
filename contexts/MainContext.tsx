@@ -1,4 +1,5 @@
 "use client"
+import { RouteChangeLayout } from "@/layouts/RouteChange"
 import { Timestamp } from "next/dist/server/lib/cache-handlers/types"
 import React, { useContext, createContext, useState, useEffect } from "react"
 
@@ -32,7 +33,7 @@ export const MainContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         const date = new Date(regional);
         // Get time in 24hr format
         const timeString = date.toLocaleTimeString([], { hour12: false });
-        console.log(timeString);
+        // console.log(timeString);
         return timeString;
     }
 
@@ -67,6 +68,7 @@ export const MainContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
     return (
         <MainContext.Provider value={contextValue}>
+            
             {children}
         </MainContext.Provider>
     );

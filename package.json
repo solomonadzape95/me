@@ -12,6 +12,7 @@
     "@heroicons/react": "^2.2.0",
     "@supabase/supabase-js": "^2.57.4",
     "gray-matter": "^4.0.3",
+    "gsap": "^3.13.0",
     "hugeicons-react": "^0.3.0",
     "marked": "^16.2.1",
     "next": "15.5.2",

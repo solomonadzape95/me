@@ -8,9 +8,10 @@ interface SkyProps {
 
 const Sky: React.FC<SkyProps> = ({ mode }) => {
   const { regionalTime } = useMain() as { regionalTime: string | null, updatedAt: number };
-  const time = regionalTime || "00:00:00";
+  const time = regionalTime ||  "00:00:00";
   const skyGradient = findSkyGradient(time);
   const timeOfDay = mode || getTimeOfDay(time);
+  const clockTime = (regionalTime?.split(":").slice(0,2)|| ["00","00"])
   
   return (
     <div
@@ -21,6 +22,7 @@ const Sky: React.FC<SkyProps> = ({ mode }) => {
       }}
     >
       {timeOfDay === "day" ? <SunWithClouds /> : <MoonWithStars />}
+      <span className={`absolute  text-5xl ${timeOfDay === "day" ? "text-gray-900 top-4 right-4 " : "text-gray-50 bottom-4 left-4"}`}>{clockTime.join(":")}</span>
     </div>
   );
 };

@@ -1,14 +1,14 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "0xsolenoid",
-    description: "portfolio homepage",
+    title: "about",
+    description: "about page for the portfolio",
   };
 export default function HomeGroupLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="font-mono w-10/12 mx-auto mt-14">
+        <>
             {children}
-        </div>
+        </>
     );
 }
 

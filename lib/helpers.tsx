@@ -131,10 +131,21 @@ function lerp(a: number, b: number, t: number) {
     // Day is roughly 6 AM to 7 PM
     return (hour >= 6 && hour < 19) ? "day" : "night";
   }
-  
+  const pageMap = [["/"], ["/about", "/projects", "/blog", "/contact"], ["/about/resume", "/projects/:id", "/blog/:id"]]
+  function findDistance(from : string, to:string){
+    // console.log(from,to)
+    let x = pageMap[1].findIndex(item => to.split("/")[1] == item.split("/")[1]) - pageMap[1].findIndex(item => from.split("/")[1] == item.split("/")[1])
+    const y = from == "/" ? (to.split("/").length + 1) - from.split("/").length :to == "/" ? to.split("/").length - (from.split("/").length + 1) : to.split("/").length - from.split("/").length 
+    if(from == "/" || to == "/"){
+      x = 0
+    }
+    return [x,y]
+   }
   export { 
     findSkyGradient, 
     findSkyColors, 
     getTimeOfDay, 
-    gradientFromHour 
+    gradientFromHour,
+    findDistance
   };
+

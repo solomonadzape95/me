@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import fs from "fs";
 import path from "path";
@@ -6,14 +5,16 @@ import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ProjectCarousel from "@/components/project-carousel";
+import React from "react";
 
-export default function ProjectPage({ params }: { params: { slug: string } }){
-  const mdPath = path.join(process.cwd(), "public", "content", "projects", params.slug, `${params.slug}.md`);
+export default async function ProjectPage({ params }: { params: { slug: string } }){
+  const {slug} = await params
+  const mdPath = path.join(process.cwd(), "public", "content", "projects", slug, `${slug}.md`);
   if (!fs.existsSync(mdPath)) return <div className="w-11/12 lg:w-10/12 mx-auto py-12 text-gray-400">project not found.</div>;
   const src = fs.readFileSync(mdPath, "utf8");
   const { data, content } = matter(src);
   const meta: any = data || {};
-  const resolveImg = (v: string) => (v?.startsWith("/content/") ? v : `/content/projects/${params.slug}/${v}`);
+  const resolveImg = (v: string) => (v?.startsWith("/content/") ? v : `/content/projects/${slug}/${v}`);
   const images: string[] = Array.isArray(meta.images) ? meta.images.map(resolveImg) : [];
 
   return (
@@ -23,7 +24,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }){
       </header>
 
      <div className="flex items-end justify-between mb-6">
-      <section><h1 className="text-4xl lg:text-5xl font-mono text-gray-200 mb-2">{meta.name || meta.title || params.slug}</h1>
+      <section><h1 className="text-4xl lg:text-5xl font-mono text-gray-200 mb-2">{meta.name || meta.title || slug}</h1>
       <p className="text-gray-400 mb-2">{meta.description || meta.tagline}</p>
         </section>
         <section className="flex flex-col items-end justify-end gap-3">
@@ -36,7 +37,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }){
 
       {images.length > 0 && (
         <div className="mb-10 w-screen relative left-1/2 -translate-x-1/2">
-          <ProjectCarousel images={images} altBase={String(meta.name || meta.title || params.slug)} />
+          <ProjectCarousel images={images} altBase={String(meta.name || meta.title || slug)} />
         </div>
       )}
 

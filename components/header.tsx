@@ -11,11 +11,10 @@ const links: { label: string, href: string }[] = [
 ]
 export default function Header() {
     const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
-    const {isWindowOpen} = useMain() as {isWindowOpen :boolean}
     const pathname = usePathname();
     const router = useRouter();
     const isActive = (path: string) => pathname === path;
-    return <header className={`flex items-center justify-between bg-background py-5 sticky top-0 left-0 right-0 z-50 font-mono ${isWindowOpen ? "brightness-100" : "brightness-75"}`}>
+    return <header className={`flex items-center justify-between bg-background py-5 sticky top-0 left-0 right-0 z-50 font-mono`}>
         <section className="flex items-center justify-between w-11/12 mx-auto bg-transparent">
             <span className="text-2xl flex items-center gap-2">
                 <span onClick={() => { router.push("/") }} className="cursor-pointer">~</span>{pathname === "/" ? "" : pathname} /<span className="w-3 h-6 inline-block bg-white animate-pulse"></span>

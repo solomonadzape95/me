@@ -6,6 +6,7 @@ import QuickProjectsHome from "@/components/quick-projects-home";
 import ThisSite from "@/components/this-site";
 import Magnets from "@/components/magnets";
 import WindowComponent from "@/components/window";
+import Tools from "@/components/tools";
 export default function About() {
   return (
     <div className="font-mono w-11/12 mx-auto mt-14">
@@ -19,6 +20,7 @@ export default function About() {
           </section>
         <WindowComponent/>
         </section>
+        <Tools />
         <QuickProjectsHome /> 
         <ThisSite />
         <Magnets /> 
