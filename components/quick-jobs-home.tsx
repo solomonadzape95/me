@@ -4,6 +4,7 @@ import { SlashIcon, XMarkIcon, CalendarIcon, ArrowLongRightIcon } from "@heroico
 import lintern from "@/assets/lintern.svg";
 import accave from "@/assets/accave.png"
 import vendeor from "@/assets/logo.png"
+import Image from "next/image";
 
 const jobs: {
   label: string;
@@ -139,7 +140,7 @@ export default function QuickJobsHome() {
             {openModal === job.label && modalPosition && (
               <Modal
                 job={job}
-                modalRef={modalRef}
+                modalRef={modalRef as React.RefObject<HTMLDivElement>}
                 onClose={() => {
                   setOpenModal(null);
                   setModalPosition(null);
@@ -147,7 +148,7 @@ export default function QuickJobsHome() {
                 position={modalPosition}
               />
             )}
-            <img src={job.logo} alt={job.label} className="w-8 h-8" />
+            <Image src={job.logo} alt={job.label} className="w-8 h-8" />
             <h3>
               {job.label}
               {jobs.indexOf(job) != 0 && <span className="text-xs text-gray-500"> (Past)</span>}
@@ -201,7 +202,7 @@ function Modal({
           }}
         />
         <div className="flex items-center gap-2 mb-2">
-          <img src={job.logo} alt={job.label} className="w-8 h-8" />
+          <Image src={job.logo} alt={job.label} className="w-8 h-8" />
           <span>
             <h3>{job.label}</h3>
             <p className="text-gray-400">{job.title}</p>

@@ -23,17 +23,35 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         <Link href="/projects" className="text-xl text-gray-300 hover:text-white transition">← projects</Link>
       </header>
 
-     <div className="flex items-end justify-between mb-6">
-      <section><h1 className="text-4xl lg:text-5xl font-mono text-gray-200 mb-2">{meta.name || meta.title || slug}</h1>
-      <p className="text-gray-400 mb-2">{meta.description || meta.tagline}</p>
-        </section>
-        <section className="flex flex-col items-end justify-end gap-3">
-      <nav className="flex items-center gap-8 text-gray-300">
-          {meta.website && <a href={meta.website} target="_blank" className="hover:text-white transition">site ↗</a>}
-          {meta.github && <a href={meta.github} target="_blank" className="hover:text-white transition">github ↗</a>}
+      <div className="flex items-end justify-between mb-6">
+        <section>
+          <h1 className="text-4xl lg:text-5xl font-mono text-gray-200 mb-2">
+            {String(meta.name) || String(meta.title) || slug}
+          </h1>
+        <p className="text-gray-400 mb-2">
+          {String(meta.description) || String(meta.tagline) || ""}
+        </p>
+      </section>
+      <section className="flex flex-col items-end justify-end gap-3">
+        <nav className="flex items-center gap-8 text-gray-300">
+          {typeof meta.website === "string" && meta.website && (
+            <a href={meta.website} target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+              site ↗
+            </a>
+          )}
+          {typeof meta.github === "string" && meta.github && (
+            <a href={meta.github} target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+              github ↗
+            </a>
+          )}
         </nav>
-      {meta.date && <p className="text-xs text-gray-500 mb-6">{new Date(meta.date).toLocaleDateString()}</p>}
-        </section></div>
+        {typeof meta.date === "string" && meta.date && (
+          <p className="text-xs text-gray-500 mb-6">
+            {new Date(meta.date).toLocaleDateString()}
+          </p>
+        )}
+      </section>
+      </div>
 
       {images.length > 0 && (
         <div className="mb-10 w-screen relative left-1/2 -translate-x-1/2">

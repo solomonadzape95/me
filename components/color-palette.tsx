@@ -62,6 +62,7 @@ export default function ColorPalette() {
       setTimeout(() => setCopied(null), 1500);
     } catch (e) {
       // fallback: do nothing
+      console.log(e)
     }
   };
 

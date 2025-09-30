@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
     const nice = params.slug.replace(/-/g, " ");

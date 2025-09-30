@@ -1,5 +1,3 @@
-import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
-import ColorPalette from "./color-palette";
 
 const langs = [
   "html", "css/scss", "js/ts","python", "solidity", "bash", "sql"

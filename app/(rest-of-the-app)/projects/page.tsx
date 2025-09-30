@@ -5,30 +5,41 @@ import path from "path";
 import matter from "gray-matter";
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
 
-export default function Projects(){
+type ProjectMeta = {
+  name?: string;
+  title?: string;
+  description?: string;
+  tagline?: string;
+  images?: string[];
+  thumbnail?: string;
+  date?: string;
+  published?: boolean;
+};
+
+export default function Projects() {
   const baseDir = path.join(process.cwd(), "public", "content", "projects");
   let items: { slug: string; title: string; description: string; image?: string; date?: string }[] = [];
   try {
     const slugs = fs.readdirSync(baseDir);
     items = slugs.flatMap((slug) => {
       const mdPath = path.join(baseDir, slug, `${slug}.md`);
-      if (!fs.existsSync(mdPath)) return [] as never[];
+      if (!fs.existsSync(mdPath)) return [];
       const src = fs.readFileSync(mdPath, "utf8");
       const { data } = matter(src);
-      const meta = data as Record<string, unknown> || {};
-      if ((meta as any).published === false) return [] as never[];
+      const meta = (data ?? {}) as ProjectMeta;
+      if (meta.published === false) return [];
       const resolveImg = (v: string) => (v?.startsWith("/content/") ? v : `/content/projects/${slug}/${v}`);
-      const images = Array.isArray((meta as any).images) ? ((meta as any).images as string[]).map(resolveImg) : [];
-      const thumb = (meta as any).thumbnail ? resolveImg((meta as any).thumbnail as string) : images[0];
+      const images = Array.isArray(meta.images) ? meta.images.map(resolveImg) : [];
+      const thumb = meta.thumbnail ? resolveImg(meta.thumbnail) : images[0];
       return [{
         slug,
-        title: (meta as any).name || (meta as any).title || slug,
-        description: (meta as any).description || (meta as any).tagline || "",
+        title: meta.name || meta.title || slug,
+        description: meta.description || meta.tagline || "",
         image: thumb,
-        date: (meta as any).date,
+        date: meta.date,
       }];
     });
-    items.sort((a,b)=>{
+    items.sort((a, b) => {
       const da = a.date ? Date.parse(a.date) : 0;
       const db = b.date ? Date.parse(b.date) : 0;
       return db - da;
@@ -66,7 +77,5 @@ export default function Projects(){
         </section>
       )}
     </main>
-  )
+  );
 }
-
-

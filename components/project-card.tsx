@@ -1,4 +1,5 @@
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function ProjectCard({title, description, image, link, date}: {title: string, description: string, image: string, link: string, date: string}) {
@@ -6,7 +7,7 @@ export default function ProjectCard({title, description, image, link, date}: {ti
     return (
         <div className="flex flex-col items-start gap-2 cursor-pointer group duration-300" onClick={()=>{router.push(link)}}>
             <span className="mb-2 w-full aspect-video outline-0 group-hover:outline-2 group-hover:outline-gray-450 group-hover:transition-all group-hover:duration-300 grid place-items-center overflow-hidden">
-                <img src={image} alt={title} className="w-full h-full object-cover" />
+                <Image src={image} alt={title} className="w-full h-full object-cover" />
             </span>
             <div className="flex items-start justify-between w-full">
                 <span>

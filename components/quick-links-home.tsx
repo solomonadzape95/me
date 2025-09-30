@@ -1,5 +1,4 @@
 "use client";
-import { ArrowLongRightIcon, } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 import { GithubIcon, Linkedin01Icon, DocumentCodeIcon } from "hugeicons-react";
 const links: { label: string, href: string, icon: React.ReactNode }[] = [

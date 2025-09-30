@@ -103,7 +103,7 @@ export default function Magnets() {
       clearTimeout(timer);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  },);
 
   // Mouse move: point arrows to mouse position with color intensity
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {

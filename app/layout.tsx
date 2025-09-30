@@ -4,11 +4,6 @@ import "./globals.css";
 import { MainContextProvider } from "@/contexts/MainContext";
 import { RouteChangeLayout } from "@/layouts/RouteChange";
 
-const jetBrainsMonoSans = JetBrains_Mono({
-  variable: "--font-jetbrains-mono-sans",
-  subsets: ["latin"],
-});
-
 const jetBrainsMonoMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono-mono",
   subsets: ["latin"],
