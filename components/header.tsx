@@ -2,7 +2,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { ArrowLongRightIcon, Bars3Icon, SlashIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { useMain } from "@/contexts/MainContext";
+// import { useMain } from "@/contexts/MainContext";
 
 const links: { label: string, href: string }[] = [
     { label: "about", href: "/about" },

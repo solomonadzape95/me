@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import { JetBrains_Mono} from "next/font/google";
 import "./globals.css";
 import { MainContextProvider } from "@/contexts/MainContext";

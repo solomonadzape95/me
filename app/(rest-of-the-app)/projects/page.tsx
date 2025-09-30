@@ -12,20 +12,20 @@ export default function Projects(){
     const slugs = fs.readdirSync(baseDir);
     items = slugs.flatMap((slug) => {
       const mdPath = path.join(baseDir, slug, `${slug}.md`);
-      if (!fs.existsSync(mdPath)) return [] as any;
+      if (!fs.existsSync(mdPath)) return [] as never[];
       const src = fs.readFileSync(mdPath, "utf8");
       const { data } = matter(src);
-      const meta: any = data || {};
-      if (meta.published === false) return [] as any;
+      const meta = data as Record<string, unknown> || {};
+      if ((meta as any).published === false) return [] as never[];
       const resolveImg = (v: string) => (v?.startsWith("/content/") ? v : `/content/projects/${slug}/${v}`);
-      const images = Array.isArray(meta.images) ? meta.images.map(resolveImg) : [];
-      const thumb = meta.thumbnail ? resolveImg(meta.thumbnail) : images[0];
+      const images = Array.isArray((meta as any).images) ? ((meta as any).images as string[]).map(resolveImg) : [];
+      const thumb = (meta as any).thumbnail ? resolveImg((meta as any).thumbnail as string) : images[0];
       return [{
         slug,
-        title: meta.name || meta.title || slug,
-        description: meta.description || meta.tagline || "",
+        title: (meta as any).name || (meta as any).title || slug,
+        description: (meta as any).description || (meta as any).tagline || "",
         image: thumb,
-        date: meta.date,
+        date: (meta as any).date,
       }];
     });
     items.sort((a,b)=>{

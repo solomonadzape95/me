@@ -64,7 +64,7 @@ export default function QuickJobsHome() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [openModal]);
+  }, [openModal, setOpenModal]);
 
   // Calculate modal position when openModal changes
   useEffect(() => {
@@ -138,8 +138,8 @@ export default function QuickJobsHome() {
           >
             {openModal === job.label && modalPosition && (
               <Modal
-                job={job as any}
-                modalRef={modalRef as any}
+                job={job}
+                modalRef={modalRef}
                 onClose={() => {
                   setOpenModal(null);
                   setModalPosition(null);

@@ -13,9 +13,9 @@ export default async function ProjectPage({ params }: { params: { slug: string }
   if (!fs.existsSync(mdPath)) return <div className="w-11/12 lg:w-10/12 mx-auto py-12 text-gray-400">project not found.</div>;
   const src = fs.readFileSync(mdPath, "utf8");
   const { data, content } = matter(src);
-  const meta: any = data || {};
+  const meta = data as Record<string, unknown> || {};
   const resolveImg = (v: string) => (v?.startsWith("/content/") ? v : `/content/projects/${slug}/${v}`);
-  const images: string[] = Array.isArray(meta.images) ? meta.images.map(resolveImg) : [];
+  const images: string[] = Array.isArray((meta as any).images) ? ((meta as any).images as string[]).map(resolveImg) : [];
 
   return (
     <main className="w-10/12 mx-auto py-10">
@@ -52,7 +52,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
             ul: ({children}) => <ul className="list-disc pl-6 space-y-2 mb-4">{children}</ul>,
             ol: ({children}) => <ol className="list-decimal pl-6 space-y-2 mb-4">{children}</ol>,
             li: ({children}) => <li className="text-gray-300">{children}</li>,
-            a: ({children, href}) => <a href={href} target="_blank" className="underline decoration-dotted hover:decoration-solid text-gray-200">{children}</a>,
+            a: ({children, href}) => <a href={href} target="_blank" rel="noopener noreferrer" className="underline decoration-dotted hover:decoration-solid text-gray-200">{children}</a>,
             code: ({children}) => <code className="px-1 py-0.5 bg-black/40 border border-white/10 text-gray-200">{children}</code>,
             pre: ({children}) => <pre className="bg-black/50 border border-white/10 p-4 overflow-auto mb-4">{children}</pre>,
             hr: () => <hr className="my-8 border-white/10" />,

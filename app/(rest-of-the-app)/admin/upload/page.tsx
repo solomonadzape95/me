@@ -19,8 +19,9 @@ export default function UploadProject() {
             try {
               const res = await uploadProjectAction(fd);
               setMessage(res.ok ? `saved: /projects/${res.slug}` : "failed");
-            } catch (e: any) {
-              setMessage(e?.message || "failed");
+            } catch (e) {
+              const message = typeof e === "object" && e && "message" in e ? String((e as {message?: string}).message) : "failed";
+              setMessage(message);
             }
           });
         }}
