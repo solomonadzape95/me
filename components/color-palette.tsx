@@ -83,7 +83,7 @@ export default function ColorPalette() {
               onClick={() => handleCopy(swatch.color, swatch.name)}
             >
               <span
-                className="text-xs lg:text-md font-mono px-2 py-1 rounded select-none transition-colors duration-150"
+                className="text-[10px] lg:text-md font-mono px-2 py-1 rounded select-none transition-colors duration-150"
                 style={{
                   color: textColor,
                   background: 'transparent',

@@ -17,7 +17,7 @@ export default function Footer(){
         ></span>
         All Systems Active
       </span>
-      <span className="ml-2 text-xs text-gray-400">&copy; {new Date().getFullYear()} Solomon Adzape</span>
+      <span className="lg:ml-2 text-xs text-gray-400">&copy; {new Date().getFullYear()} Solomon Adzape</span>
     </section>
 </footer>
 }
