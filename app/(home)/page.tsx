@@ -17,7 +17,7 @@ export default function Home(){
         <h1 className="flex items-center gap-4 text-3xl lg:text-7xl font-mono tracking-wide text-gray-200 p-0">
           <span className="opacity-90">solenoid</span>
           <span className="relative group"onClick={() => router.push("/about/resume")}>
-            <DocumentCodeIcon className="w-8 h-8 cursor-pointer text-gray-400 hover:text-gray-100 left-1/2" />
+            <DocumentCodeIcon className="w-8 h-8 lg:w-12 lg:h-12 cursor-pointer text-gray-400 hover:text-gray-100 left-1/2" />
             <span className="absolute left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded bg-gray-800 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 whitespace-nowrap">
               View my resume
             </span>
