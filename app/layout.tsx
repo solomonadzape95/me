@@ -22,7 +22,7 @@ export default function RootLayout({
 
       </head>
       <body
-        className={`${jetBrainsMonoMono.variable} antialiased bg-dark font-mono scrollbar-none`}
+        className={`${jetBrainsMonoMono.variable} antialiased bg-dark font-mono scrollbar-none h-auto`}
       >
         <RouteChangeLayout>
         <MainContextProvider>

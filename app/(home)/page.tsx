@@ -11,8 +11,8 @@ const links: { label: string, href: string }[] = [
 export default function Home(){
   const router = useRouter()
   return (
-    <main className="min-h-[70vh] flex items-center">
-      <section className="w-11/12 lg:w-10/12 mx-auto select-none space-y-3">
+    <main className="min-h-[70vh] flex items-center w-11/12">
+      <section className="lg:w-10/12 mx-auto select-none space-y-3">
         {/* Brand row */}
         <h1 className="flex items-center gap-4 text-5xl lg:text-7xl font-mono tracking-wide text-gray-200 p-0">
           <span className="opacity-90">0xsolenoid</span>

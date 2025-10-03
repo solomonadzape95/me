@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   };
 export default function HomeGroupLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="font-mono w-10/12 mx-auto mt-14">
+        <div className="font-mono w-11/12 mx-auto mt-14 h-full lg:h-auto overflow-hidden">
             {children}
         </div>
     );

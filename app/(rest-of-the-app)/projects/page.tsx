@@ -60,7 +60,7 @@ export default function Projects() {
             <Link key={slug} href={`/projects/${slug}`} className="group block">
               <div className="relative w-full aspect-[16/10] overflow-hidden border border-gray-50/20">
                 {image ? (
-                  <Image src={image} alt={title} fill className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
+                  <Image src={image} alt={title} width={10} height={10} fill className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
                 ) : (
                   <div className="w-full h-full grid place-items-center text-gray-500">no image</div>
                 )}

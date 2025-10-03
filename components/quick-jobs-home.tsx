@@ -148,7 +148,7 @@ export default function QuickJobsHome() {
                 position={modalPosition}
               />
             )}
-            <Image src={job.logo} alt={job.label} className="w-8 h-8" />
+            <Image src={job.logo} alt={job.label} className="w-8 h-8" width={10} height={10} />
             <h3>
               {job.label}
               {jobs.indexOf(job) != 0 && <span className="text-xs text-gray-500"> (Past)</span>}
@@ -182,7 +182,7 @@ function Modal({
 }) {
   return (
     <div
-      className="job-modal fixed bg-[#171616] flex items-start justify-center z-50 min-w-[300px] max-w-[90vw] min-h-[200px] rounded-xl border-gray-400 border-2 p-3 cursor-default shadow-2xl"
+      className="absolute bg-[#171616] flex items-start justify-center z-50 min-w-[300px] max-w-[90vw] min-h-[200px] rounded-xl border-gray-400 border-2 p-3 cursor-default shadow-2xl"
       ref={modalRef}
       style={{
         top: position.top,
@@ -202,7 +202,7 @@ function Modal({
           }}
         />
         <div className="flex items-center gap-2 mb-2">
-          <Image src={job.logo} alt={job.label} className="w-8 h-8" />
+          <Image src={job.logo} alt={job.label} width={10} height={10} className="w-8 h-8" />
           <span>
             <h3>{job.label}</h3>
             <p className="text-gray-400">{job.title}</p>
