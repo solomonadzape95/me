@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "0xsolenoid",
+    title: "solenoid",
     description: "portfolio homepage",
   };
 export default function HomeGroupLayout({ children }: { children: React.ReactNode }) {
