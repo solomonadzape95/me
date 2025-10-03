@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 
 export default function Footer(){
   const router = useRouter()
-  const [stats,setStats] = useState<{value: Number, prev: number} | null>(null)
+  const [stats,setStats] = useState<{value: number, prev: number} | null>(null)
   useEffect(() => {
 async function fetchStats(){
   const res = await fetch("/api/metrics")
   if(!res.ok){
     setStats(null)
   }
-  const data = await res.json() as unknown as {value: Number, prev: number}
+  const data = await res.json() as unknown as {value: number, prev: number}
   setStats(data)
 }
 fetchStats()
