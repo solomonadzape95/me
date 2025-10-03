@@ -1,5 +1,5 @@
 const contact = [
-  {link: "mailto:adzapesolomon@gmail.com", name:"email"},
+  {link: "mailto:contact@solenoid.me", name:"email"},
   {link: "https://www.linkedin.com/in/solomonadzape", name:"linkedin"},
   {link: "https://x.com/0xsolenoid", name:"X"},
   {link: "https://github.com/solomonadzape95", name:"github"},
