@@ -66,11 +66,13 @@ export default function Projects() {
                 )}
               </div>
               <div className="mt-4">
+                <span className="flex items-center justify-between">
                 <h2 className="text-lg font-mono text-gray-200 flex items-center gap-2">
                   {title}
                   <ArrowLongRightIcon className="w-4  h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300" />
                 </h2>
-                {date && <p className="text-xs text-gray-500 mt-1">{new Date(date).toLocaleDateString()}</p>}
+                {date && <p className="text-xs text-gray-500 mt-1 ml-auto">{new Date(date).toLocaleDateString()}</p>}</span>
+                
                 <p className="text-sm text-gray-400 mt-2">{description}</p>
               </div>
             </Link>

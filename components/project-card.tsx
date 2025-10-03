@@ -7,7 +7,15 @@ export default function ProjectCard({title, description, image, link, date}: {ti
     return (
         <div className="flex flex-col items-start gap-2 cursor-pointer group duration-300" onClick={()=>{router.push(link)}}>
             <span className="mb-2 w-full aspect-video outline-0 group-hover:outline-2 group-hover:outline-gray-450 group-hover:transition-all group-hover:duration-300 grid place-items-center overflow-hidden">
-                <Image src={image} alt={title} width={10} height={10} className="w-full h-full object-cover" />
+                <Image
+                    src={image}
+                    alt={title}
+                    width={1}
+                    height={1}
+                    className="w-full h-full object-cover"
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    sizes="100vw"
+                />
             </span>
             <div className="flex items-start justify-between w-full">
                 <span>

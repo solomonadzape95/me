@@ -51,8 +51,15 @@ export default function UploadProject() {
         </div>
 
         <div className="grid gap-2">
-          <label className="text-gray-300">date</label>
-          <input name="date" type="date" className="bg-transparent border border-gray-50/20 px-3 py-2 rounded" />
+          <label className="text-gray-300">date (dd/mm/yyyy)</label>
+          <input
+            name="date"
+            type="text"
+            pattern="\d{2}/\d{2}/\d{4}"
+            placeholder="dd/mm/yyyy"
+            className="bg-transparent border border-gray-50/20 px-3 py-2 rounded"
+            title="Please use the format dd/mm/yyyy"
+          />
         </div>
 
         <div className="grid gap-2">

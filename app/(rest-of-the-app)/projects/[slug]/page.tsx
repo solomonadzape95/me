@@ -80,11 +80,8 @@ export default async function ProjectPage({ params }: { params: { slug: string }
               </a>
             )}
           </nav>
-          {typeof meta.date === "string" && meta.date && (
-            <p className="text-xs text-gray-500 mb-6">
-              {new Date(meta.date).toLocaleDateString()}
-            </p>
-          )}
+          {meta.date && <p className="text-xs text-gray-500 mt-1">{new Date(meta.date).toLocaleDateString()}</p>}
+
         </section>
       </div>
 
