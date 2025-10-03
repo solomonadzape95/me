@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { SlashIcon, XMarkIcon, CalendarIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline";
 import lintern from "@/assets/lintern.svg";
 import accave from "@/assets/accave.png"
@@ -44,21 +44,18 @@ const jobs: {
     title: "Creative Technologist",
     startDate: "2023",
     endDate: "2025",
-  },]
+  },
+];
 
 export default function QuickJobsHome() {
   const [openModal, setOpenModal] = useState<null | string>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const triggerRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  // Store modal position
-  const [modalPosition, setModalPosition] = useState<{ top: number; left: number; transform: string } | null>(null);
-
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
         setOpenModal(null);
-        setModalPosition(null);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -66,53 +63,6 @@ export default function QuickJobsHome() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [openModal, setOpenModal]);
-
-  // Calculate modal position when openModal changes
-  useEffect(() => {
-    if (openModal && triggerRefs.current[openModal]) {
-      const trigger = triggerRefs.current[openModal];
-      const modalWidth = 340; // Approximate modal width (px)
-      const modalHeight = 260; // Approximate modal height (px)
-      const padding = 12; // px
-
-      if (trigger) {
-        const rect = trigger.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-
-        let top = rect.top - modalHeight - padding;
-        let left = rect.left;
-
-        const transform = "";
-
-        // If not enough space above, show below
-        if (top < 0) {
-          top = rect.bottom + padding;
-        }
-
-        // If modal would go off right edge, shift left
-        if (left + modalWidth > viewportWidth - padding) {
-          left = viewportWidth - modalWidth - padding;
-        }
-        // If modal would go off left edge, shift right
-        if (left < padding) {
-          left = padding;
-        }
-
-        // If modal would go off bottom, shift up
-        if (top + modalHeight > viewportHeight - padding) {
-          top = viewportHeight - modalHeight - padding;
-        }
-        if (top < padding) {
-          top = padding;
-        }
-
-        setModalPosition({ top, left, transform });
-      }
-    } else {
-      setModalPosition(null);
-    }
-  }, [openModal]);
 
   return (
     <>
@@ -131,21 +81,18 @@ export default function QuickJobsHome() {
             onClick={() => {
               if (openModal === job.label) {
                 setOpenModal(null);
-                setModalPosition(null);
               } else {
                 setOpenModal(job.label);
               }
             }}
           >
-            {openModal === job.label && modalPosition && (
+            {openModal === job.label && (
               <Modal
                 job={job}
                 modalRef={modalRef as React.RefObject<HTMLDivElement>}
                 onClose={() => {
                   setOpenModal(null);
-                  setModalPosition(null);
                 }}
-                position={modalPosition}
               />
             )}
             <Image src={job.logo} alt={job.label} className="w-8 h-8" width={10} height={10} />
@@ -165,7 +112,6 @@ function Modal({
   job,
   modalRef,
   onClose,
-  position,
 }: {
   job: {
     label: string;
@@ -178,16 +124,12 @@ function Modal({
   };
   modalRef: React.RefObject<HTMLDivElement>;
   onClose: () => void;
-  position: { top: number; left: number; transform: string };
 }) {
   return (
     <div
-      className="absolute bg-[#171616] flex items-start justify-center z-50 min-w-[300px] max-w-[90vw] min-h-[200px] rounded-xl border-gray-400 border-2 p-3 cursor-default shadow-2xl"
+      className={`absolute ${job.label.toLowerCase() == "vendeor" ? "right-0" : "left-0"}  top-full mt-2 bg-[#171616] flex items-start justify-center z-50 min-w-[300px] max-w-[90vw] min-h-[200px] rounded-xl border-gray-400 border-2 p-3 cursor-default shadow-2xl`}
       ref={modalRef}
       style={{
-        top: position.top,
-        left: position.left,
-        transform: position.transform,
         width: "340px",
         maxWidth: "90vw",
       }}
