@@ -7,8 +7,8 @@ const contact = [
 ]
 export default function Contact(){
   return (
-    <main className="w-11/12 lg:w-10/12 mx-auto py-16">
-      <h1 className="text-4xl lg:text-5xl font-mono text-gray-200 mb-4">contact</h1>
+    <main className="w-11/12 lg:w-10/12 mx-auto py-8">
+      <h1 className="text-2xl lg:text-5xl font-mono text-gray-200 mb-4">contact</h1>
       <p className="text-gray-400 mb-8">For the fastest response, please reach out by email.</p>
 
       <ul className="space-y-4 text-xl text-gray-300">

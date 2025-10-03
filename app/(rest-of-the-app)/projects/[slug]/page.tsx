@@ -38,33 +38,33 @@ export default async function ProjectPage({ params }: { params: { slug: string }
     : [];
 
   return (
-    <main className="w-10/12 mx-auto py-10">
+    <main className="w-11/12 lg:w-10/12 mx-auto">
       <header className="flex items-center justify-between mb-6">
         <Link
           href="/projects"
-          className="text-xl text-gray-300 hover:text-white transition"
+          className="text-sm text-gray-300 hover:text-white transition"
         >
           ← projects
         </Link>
       </header>
 
-      <div className="flex items-end justify-between mb-6">
+      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-6">
         <section>
-          <h1 className="text-4xl lg:text-5xl font-mono text-gray-200 mb-2">
+          <h1 className="text-2xl lg:text-5xl font-mono text-gray-200 mb-2">
             {meta.name || meta.title || slug}
           </h1>
-          <p className="text-gray-400 mb-2">
+          <p className="text-gray-400 mb-2 lg:text-base text-sm">
             {meta.description || meta.tagline || ""}
           </p>
         </section>
-        <section className="flex flex-col items-end justify-end gap-3">
-          <nav className="flex items-center gap-8 text-gray-300">
+        <section className="flex flex-col lg:items-end lg:justify-end gap-3 ml-auto">
+          <nav className="flex items-center gap-2 lg:gap-8 text-gray-300">
             {typeof meta.website === "string" && meta.website && (
               <a
                 href={meta.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition"
+                className="hover:text-white transition lg:text-base text-sm"
               >
                 site ↗
               </a>
@@ -74,7 +74,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
                 href={meta.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition"
+                className="hover:text-white transition lg:text-base text-sm"
               >
                 github ↗
               </a>
@@ -102,17 +102,17 @@ export default async function ProjectPage({ params }: { params: { slug: string }
           remarkPlugins={[remarkGfm]}
           components={{
             h1: ({ children }) => (
-              <h1 className="text-3xl lg:text-4xl font-mono mt-10 mb-4">
+              <h1 className="text-2xl lg:text-4xl font-mono mt-10 mb-4">
                 {children}
               </h1>
             ),
             h2: ({ children }) => (
-              <h2 className="text-2xl lg:text-3xl font-mono mt-8 mb-3">
+              <h2 className="text-xl lg:text-3xl font-mono mt-8 mb-3">
                 {children}
               </h2>
             ),
             h3: ({ children }) => (
-              <h3 className="text-xl lg:text-2xl font-mono mt-6 mb-2">
+              <h3 className="text-lg lg:text-2xl font-mono mt-6 mb-2">
                 {children}
               </h3>
             ),

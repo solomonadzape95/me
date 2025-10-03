@@ -9,7 +9,7 @@ import WindowComponent from "@/components/window";
 import Tools from "@/components/tools";
 export default function About() {
   return (
-    <div className="font-mono w-11/12 mx-auto mt-14">
+    <div className="font-mono w-11/12 mx-auto mt-8">
       <section>
         <section className="flex items-start flex-col-reverse lg:flex-row gap-2">
           <section className="lg:w-11/12">

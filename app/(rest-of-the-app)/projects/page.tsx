@@ -50,8 +50,8 @@ export default function Projects() {
   }
 
   return (
-    <main className="w-11/12 mx-auto py-12">
-      <h1 className="text-3xl lg:text-4xl font-mono text-gray-200 mb-8">projects</h1>
+    <main className="w-11/12 mx-auto py-5">
+      <h1 className="text-2xl lg:text-4xl font-mono text-gray-200 mb-8">projects</h1>
       {items.length === 0 ? (
         <div className="text-gray-500">no projects yet.</div>
       ) : (
@@ -60,13 +60,13 @@ export default function Projects() {
             <Link key={slug} href={`/projects/${slug}`} className="group block">
               <div className="relative w-full aspect-[16/10] overflow-hidden border border-gray-50/20">
                 {image ? (
-                  <Image src={image} alt={title} width={10} height={10} fill className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
+                  <Image src={image} alt={title} fill className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
                 ) : (
                   <div className="w-full h-full grid place-items-center text-gray-500">no image</div>
                 )}
               </div>
               <div className="mt-4">
-                <h2 className="text-2xl font-mono text-gray-200 flex items-center gap-2">
+                <h2 className="text-lg font-mono text-gray-200 flex items-center gap-2">
                   {title}
                   <ArrowLongRightIcon className="w-4  h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300" />
                 </h2>
