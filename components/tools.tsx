@@ -16,7 +16,7 @@ const frameworks = [
   ]
 export default function Tools() {
     return (
-        <div className="mt-5 py-10">
+        <div className="mt-10 pt-10">
        <span className="flex items-center justify-between gap-2"><h1 className="text-2xl lg:text-4xl">tools</h1> </span>
         <div className="flex flex-col items-center gap-3 lg:grid lg:grid-cols-5 lg:grid-rows-3 lg:gap-5 xl:gap-10 mt-5 w-full">
         <VerticalCard title="langs" content={langs}/>

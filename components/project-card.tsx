@@ -11,13 +11,13 @@ export default function ProjectCard({title, description, image, link, date}: {ti
             </span>
             <div className="flex items-start justify-between w-full">
                 <span>
-                    <h2 className="text-xl flex items-center gap-2 mb-1">
+                    <h2 className="text-lg flex items-center gap-2 mb-1">
                         {title} 
                         <ArrowLongRightIcon className="w-6 h-6 inline-block opacity-0 group-hover:opacity-100 group-hover:translate-x-2 group-hover:transition-all group-hover:duration-300"/>
                     </h2>
-                    <p className="text-md">{description}</p>
+                    <p className="text-sm">{description}</p>
                 </span>
-                <p className="text-sm">{date}</p>
+                <p className="text-sm text-gray-400">{date}</p>
             </div>
         </div>
     )
