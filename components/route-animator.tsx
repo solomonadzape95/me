@@ -26,7 +26,7 @@ const positionOf = (path: string): [number, number] => {
   return [0, 0];
 };
 
-const MAG = 1.25; // rem multiplier for the slide-in distance
+const MAG = 3.5; // rem multiplier for the slide-in distance
 
 export const RouteAnimator = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
