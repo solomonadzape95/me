@@ -1,60 +1,361 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #1b1b1b;
+/* -----------------------------------------------------------------------------
+   Design tokens — see .impeccable.md for the rationale behind every choice.
+   ---------------------------------------------------------------------------*/
+
+@theme {
+  /* Roles, not values. Components reference these. Values live in the
+     [data-theme] blocks below. */
+  --color-paper: oklch(0.97 0.012 75);
+  --color-ink: oklch(0.20 0.018 60);
+  --color-ink-soft: oklch(0.45 0.014 65);
+  --color-rule: oklch(0.20 0.018 60 / 0.14);
+  --color-accent: oklch(0.62 0.20 32);
+  --color-accent-soft: oklch(0.62 0.20 32 / 0.18);
+
+  --font-display: var(--font-spectral), ui-serif, Georgia, serif;
+  --font-body: var(--font-dm-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-mono: var(--font-dm-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --space-xs: 0.25rem;   /*  4px */
+  --space-sm: 0.5rem;    /*  8px */
+  --space-md: 0.75rem;   /* 12px */
+  --space-lg: 1rem;      /* 16px */
+  --space-xl: 1.5rem;    /* 24px */
+  --space-2xl: 2.5rem;   /* 40px */
+  --space-3xl: 4rem;     /* 64px */
+  --space-4xl: 6rem;     /* 96px */
+
+  --measure-prose: 65ch;
+  --measure-narrow: 56ch;
+
+  --rail-width: 16rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-jetbrains-mono-sans);
-  --font-mono: var(--font-jetbrains-mono-mono);
-}
-@keyframes sunpulse {
-  0%, 100% { 
-    box-shadow: 0 0 30px 10px rgba(255, 215, 0, 0.6);
-  }
-  50% { 
-    box-shadow: 0 0 40px 15px rgba(255, 215, 0, 0.8);
-  }
+/* Light theme is the default. */
+:root,
+:root[data-theme="light"] {
+  --color-paper: oklch(0.97 0.012 75);
+  --color-ink: oklch(0.20 0.018 60);
+  --color-ink-soft: oklch(0.45 0.014 65);
+  --color-rule: oklch(0.20 0.018 60 / 0.14);
+  --color-accent: oklch(0.62 0.20 32);
+  --color-accent-soft: oklch(0.62 0.20 32 / 0.18);
 }
 
-@keyframes twinkle {
-  0%, 100% { 
-    opacity: 0.9; 
-    transform: scale(1);
-  }
-  50% { 
-    opacity: 0.3; 
-    transform: scale(0.8);
-  }
+:root[data-theme="dark"] {
+  --color-paper: oklch(0.13 0.014 60);
+  --color-ink: oklch(0.92 0.008 75);
+  --color-ink-soft: oklch(0.68 0.010 70);
+  --color-rule: oklch(0.92 0.008 75 / 0.16);
+  --color-accent: oklch(0.72 0.20 32);
+  --color-accent-soft: oklch(0.72 0.20 32 / 0.22);
 }
+
+/* If the visitor has not chosen, follow the system. The toggle sets
+   [data-theme] explicitly and that wins. */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #171616;
-    --foreground: #ededed;
+  :root:not([data-theme]) {
+    --color-paper: oklch(0.13 0.014 60);
+    --color-ink: oklch(0.92 0.008 75);
+    --color-ink-soft: oklch(0.68 0.010 70);
+    --color-rule: oklch(0.92 0.008 75 / 0.16);
+    --color-accent: oklch(0.72 0.20 32);
+    --color-accent-soft: oklch(0.72 0.20 32 / 0.22);
   }
 }
-html{
-  scrollbar-width: none;
-  /* Hide scrollbar for Firefox */
-  scrollbar-width: none;
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    display: none;
-  }
+
+/* -----------------------------------------------------------------------------
+   Base — typography, surfaces, focus, selection, opentype features.
+   ---------------------------------------------------------------------------*/
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-feature-settings: "kern", "liga", "clig", "calt";
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  color-scheme: light dark;
 }
+
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  min-height: 100dvh;
+  margin: 0;
+  transition: background-color 220ms ease, color 220ms ease;
 }
-.scrollbar-none{
-  scrollbar-width: none;
-  /* Hide scrollbar for Firefox */
-  scrollbar-width: none;
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    display: none;
+
+/* Display + mono OpenType. Tabular figures and lining numerals on mono so
+   numbers in the data label strips actually line up. */
+.font-display,
+[class*="font-display"] {
+  font-family: var(--font-display);
+  font-feature-settings: "kern", "liga", "dlig", "calt";
+  letter-spacing: -0.012em;
+}
+
+.font-mono,
+[class*="font-mono"] {
+  font-family: var(--font-mono);
+  font-feature-settings: "kern", "tnum", "lnum", "ss01";
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* -----------------------------------------------------------------------------
+   Display-name cascade — the one signature moment.
+   Each character is a <span> with an inline --i index. Reduced-motion
+   visitors get the final state immediately.
+   ---------------------------------------------------------------------------*/
+
+@keyframes name-cascade {
+  from {
+    color: var(--color-rule);
+    transform: translateY(0.06em);
+    opacity: 0.4;
   }
+  to {
+    color: var(--color-ink);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.cn-char,
+.cn-prefix,
+.cn-out-char {
+  display: inline-block;
+  color: var(--color-ink);
+  animation: name-cascade 520ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 28ms);
+  will-change: color, transform, opacity;
+}
+
+/* Visible word break — the natural space-character glyph in inline-block
+   collapses, so we widen it explicitly. */
+[data-cn-space="true"] {
+  width: 0.32em;
+  margin: 0 0.05em;
+}
+
+/* Prefix smoothly tints to accent when the host hovers. */
+.cn-prefix {
+  transition: color 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cascade-name:hover .cn-prefix,
+.cascade-name:focus-visible .cn-prefix {
+  color: var(--color-accent);
+}
+
+/* Tail letters of the original name cascade up and out on hover, with a
+   per-letter delay so they leave left-to-right. */
+.cn-out-char {
+  transition:
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i, 0) * 30ms);
+}
+.cascade-name:hover .cn-out-char,
+.cascade-name:focus-visible .cn-out-char {
+  opacity: 0;
+  transform: translateY(-0.4em);
+}
+
+/* Nickname tail starts off-stage and rises in on hover, also staggered. */
+.cn-in-char {
+  display: inline-block;
+  color: var(--color-accent);
+  opacity: 0;
+  transform: translateY(0.45em);
+  transition:
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i, 0) * 30ms);
+  will-change: transform, opacity;
+}
+.cascade-name:hover .cn-in-char,
+.cascade-name:focus-visible .cn-in-char {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cn-char,
+  .cn-prefix,
+  .cn-out-char,
+  .cn-in-char {
+    animation: none;
+    transition: none;
+  }
+  .cascade-name:hover .cn-out-char,
+  .cascade-name:focus-visible .cn-out-char {
+    opacity: 0;
+    transform: none;
+  }
+  .cascade-name:hover .cn-in-char,
+  .cascade-name:focus-visible .cn-in-char {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Route transitions — the new page slides in from the direction of its
+   position in a small route-tree map (root at top, children below). On top
+   of that, immediate children of the route-in wrapper stagger their entry
+   so content blocks land one beat after another.
+   ---------------------------------------------------------------------------*/
+
+@keyframes route-in {
+  from {
+    opacity: 0;
+    transform: translate(var(--rdx, 0), var(--rdy, 0));
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+.route-in {
+  animation: route-in 380ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.route-in > * {
+  animation: stagger-in 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 80ms;
+}
+.route-in > *:nth-child(2) { animation-delay: 140ms; }
+.route-in > *:nth-child(3) { animation-delay: 200ms; }
+.route-in > *:nth-child(4) { animation-delay: 260ms; }
+.route-in > *:nth-child(5) { animation-delay: 320ms; }
+.route-in > *:nth-child(6) { animation-delay: 380ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .route-in,
+  .route-in > * {
+    animation: none;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Utilities used by components. Keep this list tight.
+   ---------------------------------------------------------------------------*/
+
+.rule-top {
+  border-top: 1px solid var(--color-rule);
+}
+.rule-bottom {
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+.link-underline {
+  position: relative;
+  display: inline-block;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: color 120ms ease, background-size 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover,
+.link-underline:focus-visible {
+  color: var(--color-accent);
+  background-size: 100% 2px;
+}
+
+/* -----------------------------------------------------------------------------
+   Mobile nav helpers — used by the floating-button drawer.
+   ---------------------------------------------------------------------------*/
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* -----------------------------------------------------------------------------
+   Marquee — long now-playing titles loop horizontally so nothing is hidden.
+   Translates by exactly (text width + gap), so the second copy of the text
+   lands where the first started and the loop is seamless.
+   ---------------------------------------------------------------------------*/
+
+@keyframes marquee-loop {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-1 * var(--marquee-shift, 0px))); }
+}
+
+.marquee-strip:hover,
+.marquee-strip:focus-within {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-strip {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Screenshot strip — horizontal scroll on project detail pages. The strip
+   extends past the right edge of its parent column into the viewport
+   gutter (where the map used to live).
+   ---------------------------------------------------------------------------*/
+
+.scroll-strip {
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-rule) transparent;
+  cursor: grab;
+  overscroll-behavior-x: contain;
+}
+.scroll-strip:active {
+  cursor: grabbing;
+}
+.scroll-strip::-webkit-scrollbar {
+  height: 6px;
+}
+.scroll-strip::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scroll-strip::-webkit-scrollbar-thumb {
+  background: var(--color-rule);
+  border-radius: 999px;
 }
