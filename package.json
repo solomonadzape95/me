@@ -2,19 +2,17 @@
   "name": "me",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.28.2",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
-    "@supabase/supabase-js": "^2.57.4",
+    "cmdk": "^1.1.1",
     "gray-matter": "^4.0.3",
-    "gsap": "^3.13.0",
-    "hugeicons-react": "^0.3.0",
-    "marked": "^16.2.1",
     "next": "15.5.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -31,5 +29,12 @@
     "eslint-config-next": "15.5.2",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@tailwindcss/oxide",
+      "sharp",
+      "unrs-resolver"
+    ]
   }
 }

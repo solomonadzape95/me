@@ -1,11 +1,15 @@
+import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    serverActions: {
-      // Increase body size limit for multipart/form-data uploads (default 1MB)
-      bodySizeLimit: "20mb",
-    },
+  turbopack: {
+    root: path.resolve(__dirname),
+  },
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "api.dicebear.com" },
+      { protocol: "https", hostname: "is*-ssl.mzstatic.com" },
+    ],
   },
 };
 

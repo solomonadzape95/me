@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# solenoid.me
 
-## Getting Started
+Solomon Adzape's personal site.
 
-First, run the development server:
+Stack: Next.js 15 (App Router, Turbopack) · React 19 · Tailwind v4 · TypeScript · pnpm. Content is flat markdown under `public/content/`. Design context lives in [`.impeccable.md`](./.impeccable.md).
+
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The dev server runs at <http://localhost:3000>. Theme follows the OS preference; a manual toggle is in the left rail.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm dev         # local dev with Turbopack
+pnpm build       # production build
+pnpm start       # serve the production build
+pnpm lint        # eslint
+pnpm typecheck   # tsc --noEmit
+```
 
-## Learn More
+## Project layout
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/                routes (App Router, kebab-case)
+components/         reused UI (rail, shell, theme toggle, cascade)
+lib/projects.ts     markdown loader (gray-matter)
+public/content/     project markdown + screenshots, resume PDF, OG image
+.impeccable.md      design context for the impeccable skill
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Adding a project
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create `public/content/projects/<slug>/<slug>.md` with frontmatter:
+   ```yaml
+   ---
+   published: true
+   name: <name>
+   description: <one-liner>
+   logo: <filename, optional — falls back to a DiceBear identicon>
+   thumbnail: <filename or absolute /content/... path>
+   images: [<file or absolute path>, ...]
+   stack: [<tag>, <tag>, ...]
+   status: shipped | in-progress | scaffold
+   github: <url, optional>
+   website: <url, optional>
+   date: YYYY-MM-DD
+   ---
+   ```
+2. Drop screenshots into the same folder, or point `images` at paths under another project's folder if you're staging placeholders.
+3. The index reads from the filesystem at request time — no rebuild needed in dev.
 
-## Deploy on Vercel
+## Environment variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All optional. Widgets gracefully no-op when their var is missing.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# .env.local
+LASTFM_API_KEY=…              # https://www.last.fm/api/account/create
+LASTFM_USERNAME=…             # your Last.fm username (pair Spotify→Last.fm once)
+```
+
+The Lagos map uses free CartoDB raster tiles (no key). The Now-Playing
+widget pulls metadata from Last.fm and falls back to iTunes Search for
+album art when Last.fm's image is empty or generic.
+
+## Notable features
+
+- **Command palette** — `⌘K` (or `Ctrl+K`) opens a fuzzy-search dialog covering pages, projects, and theme actions.
+- **Hover-preview thumbnails** — hovering a row on `/projects` peeks the first screenshot near the cursor.
+- **Force-directed site map** — all 12 project nodes are visible at `xl` viewports; nodes swim into new positions when you navigate.
+- **Theme toggle** — uses the View Transitions API for a circular clip-path reveal anchored to the toggle button.
+- **Nickname reveal** — hover the display name to see it morph from "Solomon Adzape" to "solenoid" (shared `Sol` prefix stays put).
+- **Now playing** — pulls the most recent track scrobbled to Last.fm, polled every 30s.
