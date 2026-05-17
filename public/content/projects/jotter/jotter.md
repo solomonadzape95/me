@@ -1,12 +1,14 @@
 ---
 published: true
 name: jotter
-description: an ai-powered tool for creating notes and assessments from lesson audios
+description: an ai-powered tool for generating notes and assessments from lesson audio.
 thumbnail: Screenshot_From_2025-10-03_14-28-55.png
 images: [Screenshot_From_2025-10-03_14-28-55.png, Screenshot_From_2025-10-03_14-49-04.png, Screenshot_From_2025-10-03_14-49-44.png]
+stack: [gemini, typescript, monaco editor]
 github: github.com/solomonadzape95/jotter.git
 website: https://jotterxyz.vercel.app
 date: 2025-07-03
+status: shipped
 ---
 ## stack
 google gemini, typescript, html, css, monaco editors
