@@ -1,12 +1,14 @@
 ---
 published: true
 name: envelope
-description: a cli tool for securely sharing env secrets with cryptography
+description: a cli tool for securely sharing env secrets with cryptography.
 thumbnail: ascii-art-text.png
 images: [ascii-art-text.png, Screenshot_From_2025-10-03_15-34-09.png, Screenshot_From_2025-10-03_15-35-21.png]
+stack: [commander, typescript, chalk, node.js]
 github: github.com/solomonadzape95/envelope.git
 website: https://www.npmjs.com/package/envelope-cli
 date: 2025-09-16
+status: shipped
 ---
 ## stack
 commander, typescript, chalk, nodejs

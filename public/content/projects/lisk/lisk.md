@@ -1,12 +1,14 @@
 ---
 published: true
 name: lisk-dashboard
-description: a data analysis project for some lisk tokens
+description: a data-analysis dashboard for two tokens on the lisk chain.
 thumbnail: Screenshot_From_2025-10-03_15-20-09.png
 images: [Screenshot_From_2025-10-03_15-20-09.png, Screenshot_From_2025-10-03_15-20-16.png, Screenshot_From_2025-10-03_15-20-21.png, Screenshot_From_2025-10-03_15-20-26.png]
+stack: [next.js, moralis, react query, prisma, recharts]
 github: github.com/solomonadzape95/lisk-analytics-dashboard.git
 website: liskanlytics.vercel.app
 date: 2025-07-20
+status: shipped
 ---
 ## stack
 nextjs, api routes, typescript, moralis apis, react query, prisma, recharts
