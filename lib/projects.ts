@@ -1,65 +1,96 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import matter from "gray-matter";
+
+export type ProjectStatus = "shipped" | "in-progress" | "scaffold" | "archived";
+
 export type Project = {
   slug: string;
-  title: string;
-  tagline: string;
-  image: string; // public path or remote
-  site?: string;
-  repo?: string;
-  content: {
-    idea?: string;
-    implementation?: string;
-    thoughts?: string;
+  name: string;
+  description: string;
+  date: string;
+  year: string;
+  github?: string;
+  website?: string;
+  thumbnail?: string;
+  logo?: string;
+  images: string[];
+  stack: string[];
+  status?: ProjectStatus;
+  body: string;
+  published: boolean;
+};
+
+const PROJECTS_DIR = path.join(process.cwd(), "public", "content", "projects");
+
+const ensureProtocol = (url: string | undefined) => {
+  if (!url) return undefined;
+  if (/^https?:\/\//.test(url)) return url;
+  return `https://${url}`;
+};
+
+const resolveAsset = (slug: string, file: string) =>
+  file.startsWith("/") ? file : `/content/projects/${slug}/${file}`;
+
+/**
+ * YAML 1.1 inside gray-matter auto-parses bare ISO dates (2025-10-15) into JS
+ * `Date` objects. We always want the YYYY-MM-DD string. Anything quoted in
+ * the frontmatter (e.g. "2026") passes through as a string already.
+ */
+const formatDate = (raw: unknown): string => {
+  if (raw == null) return "";
+  if (raw instanceof Date) {
+    const yyyy = raw.getUTCFullYear();
+    const mm = String(raw.getUTCMonth() + 1).padStart(2, "0");
+    const dd = String(raw.getUTCDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+  }
+  return String(raw);
+};
+
+const loadOne = async (slug: string): Promise<Project | null> => {
+  const file = path.join(PROJECTS_DIR, slug, `${slug}.md`);
+  let raw: string;
+  try {
+    raw = await fs.readFile(file, "utf8");
+  } catch {
+    return null;
+  }
+  const parsed = matter(raw);
+  const data = parsed.data as Record<string, unknown>;
+  const dateRaw = formatDate(data.date);
+  const year = /^\d{4}/.test(dateRaw) ? dateRaw.slice(0, 4) : dateRaw;
+  return {
+    slug,
+    name: String(data.name ?? slug),
+    description: String(data.description ?? ""),
+    date: dateRaw,
+    year,
+    github: ensureProtocol(data.github as string | undefined),
+    website: ensureProtocol(data.website as string | undefined),
+    thumbnail: data.thumbnail
+      ? resolveAsset(slug, String(data.thumbnail))
+      : undefined,
+    logo: data.logo ? resolveAsset(slug, String(data.logo)) : undefined,
+    images: Array.isArray(data.images)
+      ? (data.images as string[]).map((f) => resolveAsset(slug, f))
+      : [],
+    stack: Array.isArray(data.stack)
+      ? (data.stack as string[]).map((s) => String(s))
+      : [],
+    status: data.status ? (String(data.status) as ProjectStatus) : undefined,
+    body: parsed.content,
+    published: data.published !== false,
   };
 };
 
-export const projects: Project[] = [
-  {
-    slug: "forklift",
-    title: "forklift",
-    tagline: "your ai-powered shortcut to open source",
-    image: "/assets/image-a.jpg",
-    site: "https://example.com",
-    repo: "https://github.com/example/forklift",
-    content: {
-      idea:
-        "help people discover repos, understand codebases, and start contributing with AI assistance.",
-      implementation:
-        "react + node prototype evolving into a refined frontend. oauth, caching, and summaries handled by services.",
-      thoughts:
-        "clean interface with a real use case; lots of iteration and polish to land the experience.",
-    },
-  },
-  {
-    slug: "restart",
-    title: "re-start",
-    tagline: "a tui‑style browser startpage",
-    image: "/assets/image-b.jpg",
-    site: "https://example.com",
-    repo: "https://github.com/example/re-start",
-    content: {
-      idea: "minimal keyboard‑first dashboard with weather, time, and links.",
-      implementation:
-        "built with next.js and tailwind; data widgets composed as small client components.",
-      thoughts:
-        "simple building blocks made it fun to extend without adding complexity.",
-    },
-  },
-  {
-    slug: "system24",
-    title: "system24",
-    tagline: "a tui‑style discord theme.",
-    image: "/assets/purple-white.png",
-    repo: "https://github.com/example/system24",
-    content: {
-      idea: "tasteful retro aesthetics for modern apps.",
-      implementation: "theme tokens + css variables; responsive and accessible.",
-      thoughts: "constraints drove the design; less is more.",
-    },
-  },
-];
+export const getAllProjects = async (): Promise<Project[]> => {
+  const entries = await fs.readdir(PROJECTS_DIR, { withFileTypes: true });
+  const slugs = entries.filter((e) => e.isDirectory()).map((e) => e.name);
+  const projects = await Promise.all(slugs.map(loadOne));
+  return projects
+    .filter((p): p is Project => p !== null && p.published)
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
+};
 
-export function getProject(slug: string) {
-  return projects.find((p) => p.slug === slug);
-}
-
-
+export const getProject = (slug: string) => loadOne(slug);
