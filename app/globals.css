@@ -306,6 +306,13 @@ a {
   background-size: 100% 2px;
 }
 
+/* Some company logos are white-on-transparent and disappear on the paper
+   surface — give them a dark backdrop in light mode so the mark stays
+   visible. Dark mode already has the contrast for free. */
+:root:not([data-theme="dark"]) .logo-on-dark {
+  background: var(--color-ink);
+}
+
 /* -----------------------------------------------------------------------------
    Mobile nav helpers — used by the floating-button drawer.
    ---------------------------------------------------------------------------*/
