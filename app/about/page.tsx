@@ -2,8 +2,8 @@ import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 
 import accavePng from "@/assets/accave.png";
-import linternSvg from "@/assets/lintern.svg";
-import vendeorPng from "@/assets/logo.png";
+import borrandsPng from "@/assets/borrands.png";
+import listaccPng from "@/assets/listacc.png";
 import { CascadeName } from "@/components/cascade-name";
 import { Section, SiteShell } from "@/components/site-shell";
 
@@ -18,26 +18,29 @@ type Job = {
   end: string;
   blurb: string;
   logo: StaticImageData | string;
+  href?: string;
 };
 
 const JOBS: Job[] = [
   {
-    company: "Lintern",
-    role: "Founding engineer",
+    company: "Listacc Limited",
+    role: "Software engineer",
     start: "2025",
     end: "now",
     blurb:
-      "Building, managing, and providing initial support for the Lintern application.",
-    logo: linternSvg,
+      "Teaching blockchain development at an IT firm in Nsukka and shipping client web projects alongside the team.",
+    logo: listaccPng,
+    href: "https://academy.listacc.com",
   },
   {
-    company: "Vendeor",
+    company: "Borrands",
     role: "Founding engineer",
     start: "2024",
     end: "2025",
     blurb:
-      "Led and contributed to Vendeor's MVP, collaborating closely with the engineering team.",
-    logo: vendeorPng,
+      "Led and contributed to Borrands' MVP — an ecommerce platform — collaborating closely with the engineering team.",
+    logo: borrandsPng,
+    href: "https://www.borrands.com.ng/",
   },
   {
     company: "Accave",
@@ -47,6 +50,7 @@ const JOBS: Job[] = [
     blurb:
       "Produced educational content and infographics that improved engagement and learning on the Accave platform.",
     logo: accavePng,
+    href: "https://accave.com",
   },
 ];
 
@@ -142,7 +146,18 @@ export default function AboutPage() {
                   {job.start} — {job.end}
                 </div>
                 <h3 className="font-display text-2xl text-(--color-ink) leading-tight">
-                  {job.company}{" "}
+                  {job.href ? (
+                    <a
+                      href={job.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="link-underline"
+                    >
+                      {job.company}
+                    </a>
+                  ) : (
+                    job.company
+                  )}{" "}
                   <span className="text-(--color-ink-soft) font-body text-base italic">
                     · {job.role}
                   </span>
