@@ -34,7 +34,7 @@ const JOBS: Job[] = [
   },
   {
     company: "Borrands",
-    role: "Founding engineer",
+    role: "Software engineer",
     start: "2024",
     end: "2025",
     blurb:
