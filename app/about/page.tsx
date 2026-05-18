@@ -30,7 +30,7 @@ const JOBS: Job[] = [
     start: "2025",
     end: "now",
     blurb:
-      "Teaching blockchain development at an IT firm in Nsukka and shipping client web projects alongside the team.",
+      "Teaching blockchain development at an IT firm and shipping client web projects alongside the team.",
     logo: listaccPng,
     href: "https://academy.listacc.com",
     bigLogo: true,
