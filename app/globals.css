@@ -158,8 +158,11 @@ a {
   margin: 0 0.05em;
 }
 
-/* Prefix smoothly tints to accent when the host hovers. */
+/* Prefix smoothly tints to accent when the host hovers. At rest it sits
+   one notch off the rest of the name — lighter in light mode, slightly
+   darker in dark — to invite a hover discovery. */
 .cn-prefix {
+  color: color-mix(in oklab, var(--color-ink) 70%, var(--color-paper));
   transition: color 260ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .cascade-name:hover .cn-prefix,
