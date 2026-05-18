@@ -19,6 +19,8 @@ type Job = {
   blurb: string;
   logo: StaticImageData | string;
   href?: string;
+  bigLogo?: boolean;
+  darkBackdrop?: boolean;
 };
 
 const JOBS: Job[] = [
@@ -31,6 +33,8 @@ const JOBS: Job[] = [
       "Teaching blockchain development at an IT firm in Nsukka and shipping client web projects alongside the team.",
     logo: listaccPng,
     href: "https://academy.listacc.com",
+    bigLogo: true,
+    darkBackdrop: true,
   },
   {
     company: "Borrands",
@@ -41,6 +45,7 @@ const JOBS: Job[] = [
       "Led and contributed to Borrands' MVP — an ecommerce platform — collaborating closely with the engineering team.",
     logo: borrandsPng,
     href: "https://www.borrands.com.ng/",
+    bigLogo: true,
   },
   {
     company: "Accave",
@@ -130,14 +135,20 @@ export default function AboutPage() {
           {JOBS.map((job) => (
             <li
               key={job.company}
-              className="group grid gap-x-8 gap-y-3 sm:grid-cols-[5rem_minmax(0,1fr)] sm:items-center"
+              className="group grid gap-x-8 gap-y-3 sm:grid-cols-[6rem_minmax(0,1fr)] sm:items-center"
             >
-              <span className="inline-flex h-16 w-16 items-center justify-center grayscale opacity-80 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100">
+              <span
+                className={
+                  "inline-flex items-center justify-center grayscale opacity-80 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100 " +
+                  (job.bigLogo ? "h-24 w-24 p-1.5 " : "h-16 w-16 ") +
+                  (job.darkBackdrop ? "logo-on-dark " : "")
+                }
+              >
                 <Image
                   src={job.logo}
                   alt=""
-                  width={64}
-                  height={64}
+                  width={96}
+                  height={96}
                   className="block h-full w-full object-contain"
                 />
               </span>
