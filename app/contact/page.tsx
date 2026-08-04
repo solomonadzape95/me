@@ -20,10 +20,14 @@ const LINKS: Link[] = [
   },
   {
     label: "linkedin",
-    value: "linkedin.com/in/solomon-adzape",
-    href: "https://www.linkedin.com/in/solomon-adzape/",
+    value: "linkedin.com/in/solomonadzape",
+    href: "https://www.linkedin.com/in/solomonadzape/",
   },
-  { label: "x", value: "x.com/solenoid", href: "https://x.com/solenoid" },
+  {
+    label: "x",
+    value: "x.com/0xsolenoid",
+    href: "https://x.com/0xsolenoid",
+  },
 ];
 
 export default function ContactPage() {

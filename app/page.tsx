@@ -7,7 +7,7 @@ import { getAllProjects } from "@/lib/projects";
 
 // Hand-curated — all four have real logo files in their content folder so
 // the home page never falls back to identicons.
-const SELECTED_SLUGS = ["blockhive", "lexis", "aria", "rizzlr"];
+const SELECTED_SLUGS = ["kai", "nebula", "crypt", "aria"];
 
 export default async function HomePage() {
   const projects = await getAllProjects();
@@ -22,14 +22,18 @@ export default async function HomePage() {
         <h1 className="font-display font-light leading-[0.95] tracking-tight text-(--color-ink) text-[clamp(2.5rem,7vw,4.75rem)] break-words">
           <CascadeName text="Solomon Adzape" nickname="solenoid" />
         </h1>
-        <p className="text-(--color-ink-soft) leading-relaxed">
-          i&apos;m someone who likes to build things and figure stuff out.
-          Currently working on <span className="text-(--color-ink)">Blockhive</span>,
-          and a few other things on the side.
-        </p>
+        <div className="max-w-[66ch] space-y-2 leading-relaxed">
+          <p className="text-(--color-ink) text-lg">
+            Software engineer building beautiful, functional experiences.
+          </p>
+          <p className="text-(--color-ink-soft)">
+            I work across AI, desktop, and financial products—from interaction
+            design through systems, integrations, and deployment.
+          </p>
+        </div>
       </header>
 
-      <Section label="quick picks">
+      <Section label="selected work">
         <ol className="space-y-2">
           {selected.map((p) => (
             <li key={p.slug}>
@@ -49,7 +53,9 @@ export default async function HomePage() {
                       {p.name}
                     </span>
                     <span className="label-mono tabular-nums shrink-0">
-                      {p.year}
+                      {[p.status?.replace("-", " "), p.year]
+                        .filter(Boolean)
+                        .join(" · ")}
                     </span>
                   </div>
                   <p className="text-(--color-ink-soft) text-[0.92rem] leading-relaxed">
@@ -106,23 +112,23 @@ export default async function HomePage() {
           <li className="text-(--color-ink-soft)">linkedin</li>
           <li>
             <a
-              href="https://www.linkedin.com/in/solomon-adzape/"
+              href="https://www.linkedin.com/in/solomonadzape/"
               target="_blank"
               rel="noreferrer"
               className="link-underline"
             >
-              solomon-adzape
+              solomonadzape
             </a>
           </li>
           <li className="text-(--color-ink-soft)">x</li>
           <li>
             <a
-              href="https://x.com/solenoid"
+              href="https://x.com/0xsolenoid"
               target="_blank"
               rel="noreferrer"
               className="link-underline"
             >
-              @solenoid
+              @0xsolenoid
             </a>
           </li>
           <li className="text-(--color-ink-soft)">mail</li>
