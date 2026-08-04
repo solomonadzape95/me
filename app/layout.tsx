@@ -28,28 +28,28 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://solenoid.me"),
+  metadataBase: new URL("https://thesolenoid.space"),
   title: {
     default: "Solomon Adzape — solenoid",
     template: "%s · Solomon Adzape",
   },
   description:
-    "Solomon Adzape — frontend engineer and founding engineer based in Lagos. Selected work, writing, and contact.",
+    "Solomon Adzape — software engineer building beautiful, functional experiences across AI, desktop, and financial products.",
   openGraph: {
     title: "Solomon Adzape — solenoid",
     description:
-      "Solomon Adzape — frontend engineer and founding engineer based in Lagos.",
-    url: "https://solenoid.me",
-    siteName: "solenoid.me",
+      "Software engineer building beautiful, functional experiences across AI, desktop, and financial products.",
+    url: "https://thesolenoid.space",
+    siteName: "thesolenoid.space",
     images: ["/content/images/file.jpg"],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    creator: "@solenoid",
+    creator: "@0xsolenoid",
     title: "Solomon Adzape — solenoid",
     description:
-      "Solomon Adzape — frontend engineer and founding engineer based in Lagos.",
+      "Software engineer building beautiful, functional experiences across AI, desktop, and financial products.",
   },
 };
 

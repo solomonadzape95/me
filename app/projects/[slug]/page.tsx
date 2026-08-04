@@ -75,6 +75,11 @@ export default async function ProjectPage({
         </p>
         <dl className="space-y-2">
           {project.year && <TagRow label="year">{project.year}</TagRow>}
+          {project.status && (
+            <TagRow label="status">
+              {project.status.replace("-", " ")}
+            </TagRow>
+          )}
           {project.stack.length > 0 && (
             <TagRow label="stack">
               {project.stack.map((tag, i, arr) => (

@@ -61,7 +61,9 @@ export const ProjectListClient = ({ projects }: Props) => {
                     {p.name}
                   </span>
                   <span className="label-mono tabular-nums shrink-0">
-                    {p.year}
+                    {[p.status?.replace("-", " "), p.year]
+                      .filter(Boolean)
+                      .join(" · ")}
                   </span>
                 </div>
                 <p className="text-(--color-ink-soft) text-[0.92rem] leading-relaxed">
