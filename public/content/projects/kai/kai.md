@@ -3,6 +3,8 @@ published: true
 name: kai
 description: a local-first desktop assistant with on-device inference, reminders, voice notes, connected services, and governed tool use.
 logo: logo.png
+thumbnail: thumb.webp
+images: [shot-1.webp, shot-2.webp, shot-3.webp, shot-4.webp, shot-5.webp, shot-6.webp, shot-7.webp, shot-8.webp]
 stack: [tauri, rust, react, typescript, llama.cpp, postgresql]
 github: github.com/solomonadzape95/kai
 website: https://kai.thesolenoid.space

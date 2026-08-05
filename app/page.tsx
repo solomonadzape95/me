@@ -133,8 +133,8 @@ export default async function HomePage() {
           </li>
           <li className="text-(--color-ink-soft)">mail</li>
           <li>
-            <a href="mailto:contact@solenoid.me" className="link-underline">
-              contact@solenoid.me
+            <a href="mailto:adzapesolomon@gmail.com" className="link-underline">
+              adzapesolomon@gmail.com
             </a>
           </li>
         </ul>

@@ -10,8 +10,8 @@ type Link = { label: string; value: string; href: string };
 const LINKS: Link[] = [
   {
     label: "email",
-    value: "contact@solenoid.me",
-    href: "mailto:contact@solenoid.me",
+    value: "adzapesolomon@gmail.com",
+    href: "mailto:adzapesolomon@gmail.com",
   },
   {
     label: "github",

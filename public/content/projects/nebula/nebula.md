@@ -3,11 +3,11 @@ published: true
 name: nebula
 description: an unaudited Stellar testnet vault that supplies XLM to Blend and issues liquid, value-accruing nXLM shares.
 logo: logo.svg
-thumbnail: thumb.jpg
-images: [thumb.jpg]
+thumbnail: thumb.webp
+images: [shot-1.webp, shot-2.webp, shot-3.webp, shot-4.webp, shot-5.webp, shot-6.webp]
 stack: [soroban, rust, next.js, typescript, postgresql, stellar]
 github: github.com/solomonadzape95/nebula
-website: https://nebula-pi-ruddy.vercel.app
+website: https://nebula.thesolenoid.space
 date: 2026-07-28
 status: in-progress
 ---

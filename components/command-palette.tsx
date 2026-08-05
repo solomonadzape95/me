@@ -176,7 +176,7 @@ export const CommandPalette = ({ projects }: Props) => {
             value="action email"
             onSelect={() =>
               run(() => {
-                window.location.href = "mailto:contact@solenoid.me";
+                window.location.href = "mailto:adzapesolomon@gmail.com";
               })
             }
             className="px-3 py-2 cursor-pointer data-[selected=true]:bg-(--color-accent-soft) data-[selected=true]:text-(--color-accent)"

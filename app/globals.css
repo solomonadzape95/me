@@ -122,6 +122,11 @@ a {
   text-decoration: none;
 }
 
+.rail-link:hover,
+.rail-link:focus-visible {
+  color: var(--color-accent);
+}
+
 /* -----------------------------------------------------------------------------
    Display-name cascade — the one signature moment.
    Each character is a <span> with an inline --i index. Reduced-motion

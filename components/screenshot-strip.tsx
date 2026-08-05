@@ -106,7 +106,7 @@ export const ScreenshotStrip = ({ images, name }: Props) => {
                   height={1500}
                   draggable={false}
                   sizes="(min-width: 1024px) 42rem, 70vw"
-                  className="block h-full w-auto object-cover select-none"
+                  className="block h-full w-full object-contain select-none"
                   priority={i === 0}
                 />
               </figure>
