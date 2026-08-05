@@ -25,7 +25,7 @@ export default async function ProjectsIndexPage() {
             name: p.name,
             description: p.description,
             year: p.year,
-            status: undefined,
+            status: p.status,
             logo: p.logo,
             stack: p.stack,
             thumb: p.thumbnail ?? p.images[0],

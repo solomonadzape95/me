@@ -2,8 +2,6 @@ import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 
 import accavePng from "@/assets/accave.png";
-import borrandsPng from "@/assets/borrands.png";
-import listaccPng from "@/assets/listacc.png";
 import { CascadeName } from "@/components/cascade-name";
 import { Section, SiteShell } from "@/components/site-shell";
 
@@ -17,7 +15,7 @@ type Job = {
   start: string;
   end: string;
   blurb: string;
-  logo: StaticImageData | string;
+  logo?: StaticImageData | string;
   href?: string;
   bigLogo?: boolean;
   darkBackdrop?: boolean;
@@ -25,35 +23,28 @@ type Job = {
 
 const JOBS: Job[] = [
   {
-    company: "Listacc Limited",
-    role: "Software engineer",
-    start: "2025",
-    end: "now",
+    company: "Vendeor",
+    role: "Founding engineer",
+    start: "Aug 2024",
+    end: "Apr 2025",
     blurb:
-      "Teaching blockchain development at an IT firm and shipping client web projects alongside the team.",
-    logo: listaccPng,
-    href: "https://academy.listacc.com",
-    bigLogo: true,
-    darkBackdrop: true,
+      "Shipped a responsive storefront and reusable component system, then owned Paystack checkout, ordering, and admin analytics across the frontend and REST APIs.",
   },
   {
-    company: "Borrands",
+    company: "Lumina",
     role: "Software engineer",
-    start: "2024",
-    end: "2025",
+    start: "Mar 2023",
+    end: "May 2024",
     blurb:
-      "Led and contributed to Borrands' MVP — an ecommerce platform — collaborating closely with the engineering team.",
-    logo: borrandsPng,
-    href: "https://www.borrands.com.ng/",
-    bigLogo: true,
+      "Co-led the frontend of a Web3 learning platform, building interactive React interfaces, dashboards, and onchain certificate and reward flows.",
   },
   {
     company: "Accave",
-    role: "Creative technologist",
-    start: "2023",
-    end: "2025",
+    role: "Software engineer & creative technologist",
+    start: "Jun 2022",
+    end: "Jul 2024",
     blurb:
-      "Produced educational content and infographics that improved engagement and learning on the Accave platform.",
+      "Built cross-device learning experiences and dashboards while also producing educational media for complex technical subjects.",
     logo: accavePng,
     href: "https://accave.com",
   },
@@ -71,6 +62,7 @@ const SKILLS: Skill[] = [
     items: [
       "React",
       "Next.js",
+      "Tauri",
       "Node.js",
       "Express",
       "FastAPI",
@@ -80,7 +72,10 @@ const SKILLS: Skill[] = [
     ],
   },
   { label: "db", items: ["PostgreSQL", "MongoDB", "Firestore"] },
-  { label: "niche", items: ["Frontend", "Backend", "Web3", "Motion design"] },
+  {
+    label: "focus",
+    items: ["Product engineering", "AI agents", "Desktop", "Fintech"],
+  },
   {
     label: "tools",
     items: [
@@ -100,24 +95,25 @@ export default function AboutPage() {
     <SiteShell>
       <header className="space-y-5 mb-4">
         <h1 className="font-display font-light leading-[1.05] tracking-tight text-(--color-ink) text-[clamp(2rem,5vw,3.25rem)]">
-          <CascadeName text="A student. I build things." />
+          <CascadeName text="Software engineer. Product builder." />
         </h1>
       </header>
 
       <Section label="bio">
         <div className="space-y-4 leading-relaxed mb-4">
           <p>
-            My interests are computer science, engineering, and sports. I focus
-            on web development, and enjoy working with AI tools, data, and the
-            blockchain.
+            I&apos;m a software engineer with more than four years of experience
+            building responsive products across web applications, desktop
+            software, browser extensions, and onchain systems.
           </p>
           <p>
-            I like understanding how things work — so I enjoy planning and
-            building scalable systems. I also enjoy solving puzzles and
-            tackling problems that resist easy solutions.
+            I work mainly with React, Next.js, TypeScript, and Node.js, but I&apos;m
+            comfortable owning a product beyond its interface—across APIs,
+            databases, AI integrations, native bridges, and deployment.
           </p>
           <p>
-            This site is the proof, not the pitch. Selected work lives on{" "}
+            I&apos;m currently completing a B.Sc. in Computer Science at the
+            University of Nigeria, Nsukka. Selected work lives on{" "}
             <Link href="/projects" className="link-underline">
               /projects
             </Link>
@@ -144,13 +140,22 @@ export default function AboutPage() {
                   (job.darkBackdrop ? "logo-on-dark " : "")
                 }
               >
-                <Image
-                  src={job.logo}
-                  alt=""
-                  width={96}
-                  height={96}
-                  className="block h-full w-full object-contain"
-                />
+                {job.logo ? (
+                  <Image
+                    src={job.logo}
+                    alt=""
+                    width={96}
+                    height={96}
+                    className="block h-full w-full object-contain"
+                  />
+                ) : (
+                  <span
+                    aria-hidden="true"
+                    className="font-display text-4xl text-(--color-ink-soft)"
+                  >
+                    {job.company.slice(0, 1)}
+                  </span>
+                )}
               </span>
               <div className="space-y-2 max-w-[60ch]">
                 <div className="font-mono text-[0.78rem] uppercase tracking-[0.06em] text-(--color-ink-soft) tabular-nums">

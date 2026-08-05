@@ -1,8 +1,8 @@
-# solenoid.me
+# thesolenoid.space
 
 Solomon Adzape's personal site.
 
-Stack: Next.js 15 (App Router, Turbopack) · React 19 · Tailwind v4 · TypeScript · pnpm. Content is flat markdown under `public/content/`. Design context lives in [`.impeccable.md`](./.impeccable.md).
+Stack: Next.js 16 (App Router, Turbopack) · React 19 · Tailwind v4 · TypeScript · pnpm. Content is flat markdown under `public/content/`. Design context lives in [`.impeccable.md`](./.impeccable.md).
 
 ## Development
 
