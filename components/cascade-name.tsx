@@ -4,7 +4,7 @@ import { useState } from "react";
 
 /**
  * Renders the display name with the staggered hue-cascade on first paint
- * AND a letter-by-letter nickname reveal on hover/focus. The shared
+ * AND a letter-by-letter nickname reveal on click or keyboard activation. The shared
  * lowercase prefix between `text` and `nickname` stays in place and
  * tints to --color-accent; the rest of the original name cascades up and
  * out, while the rest of the nickname cascades up and into the same line.

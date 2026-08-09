@@ -3,6 +3,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 import accavePng from "@/assets/accave.png";
+import linternSvg from "@/assets/lintern.svg";
+import vendeorPng from "@/assets/logo.png";
 import { CascadeName } from "@/components/cascade-name";
 import { Section, SiteShell } from "@/components/site-shell";
 
@@ -34,14 +36,16 @@ const JOBS: Job[] = [
     end: "Apr 2025",
     blurb:
       "Shipped a responsive storefront and reusable component system, then owned Paystack checkout, ordering, and admin analytics across the frontend and REST APIs.",
+    logo: vendeorPng,
   },
   {
-    company: "Lumina",
+    company: "Lintern",
     role: "Software engineer",
     start: "Mar 2023",
     end: "May 2024",
     blurb:
       "Co-led the frontend of a Web3 learning platform, building interactive React interfaces, dashboards, and onchain certificate and reward flows.",
+    logo: linternSvg,
   },
   {
     company: "Accave",
@@ -140,7 +144,7 @@ export default function AboutPage() {
             >
               <span
                 className={
-                  "inline-flex items-center justify-center grayscale opacity-80 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100 " +
+                  "inline-flex items-center justify-center grayscale opacity-80 max-lg:grayscale-0 max-lg:opacity-100 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100 " +
                   (job.bigLogo ? "h-24 w-24 p-1.5 " : "h-16 w-16 ") +
                   (job.darkBackdrop ? "logo-on-dark " : "")
                 }
