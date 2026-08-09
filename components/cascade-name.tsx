@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 /**
  * Renders the display name with the staggered hue-cascade on first paint
  * AND a letter-by-letter nickname reveal on hover/focus. The shared
@@ -42,6 +44,8 @@ const renderChars = (
   ));
 
 export const CascadeName = ({ text, nickname, className }: Props) => {
+  const [showNickname, setShowNickname] = useState(false);
+
   if (!nickname) {
     return (
       <span className={className}>
@@ -57,9 +61,18 @@ export const CascadeName = ({ text, nickname, className }: Props) => {
 
   return (
     <span
-      className={`cascade-name group/cn relative inline-block cursor-default ${className ?? ""}`}
+      className={`cascade-name group/cn relative inline-block cursor-pointer ${showNickname ? "is-nickname-active" : ""} ${className ?? ""}`}
       tabIndex={0}
+      role="button"
+      aria-pressed={showNickname}
       aria-label={`${text} — also known as ${nickname}`}
+      onClick={() => setShowNickname((visible) => !visible)}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setShowNickname((visible) => !visible);
+        }
+      }}
     >
       {renderChars(shared, "cn-prefix")}
       <span className="cn-stack relative inline-block align-baseline">

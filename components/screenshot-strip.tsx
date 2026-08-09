@@ -82,39 +82,8 @@ export const ScreenshotStrip = ({ images, name }: Props) => {
   if (images.length === 0) return null;
 
   return (
-    <div className="relative">
-      <div
-        ref={ref}
-        onWheel={onWheel}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
-        className="scroll-strip overflow-x-auto"
-      >
-        <ul className="flex gap-3 pr-12 pb-3">
-          {images.map((src, i) => (
-            <li
-              key={src}
-              className="shrink-0 h-72 lg:h-[26rem] aspect-[16/10]"
-            >
-              <figure className="h-full w-full border border-(--color-rule) overflow-hidden bg-(--color-paper)">
-                <Image
-                  src={src}
-                  alt={`${name} screenshot ${i + 1}`}
-                  width={2400}
-                  height={1500}
-                  draggable={false}
-                  sizes="(min-width: 1024px) 42rem, 70vw"
-                  className="block h-full w-full object-contain select-none"
-                  priority={i === 0}
-                />
-              </figure>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="absolute -top-12 right-0 flex items-baseline gap-3 label-mono">
+    <div className="mt-2 mb-4 space-y-4 sm:mt-4 sm:mb-8">
+      <div className="flex items-baseline justify-end gap-3 label-mono">
         <button
           type="button"
           onClick={() => advance(-1)}
@@ -133,6 +102,37 @@ export const ScreenshotStrip = ({ images, name }: Props) => {
         >
           →
         </button>
+      </div>
+      <div
+        ref={ref}
+        onWheel={onWheel}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        className="scroll-strip overflow-x-auto"
+      >
+        <ul className="flex gap-3 pr-12 pb-3">
+          {images.map((src, i) => (
+            <li
+              key={src}
+              className="shrink-0 h-72 lg:h-[26rem] aspect-[16/10]"
+            >
+              <figure className="h-full w-full overflow-hidden bg-(--color-paper)">
+                <Image
+                  src={src}
+                  alt={`${name} screenshot ${i + 1}`}
+                  width={2400}
+                  height={1500}
+                  draggable={false}
+                  sizes="(min-width: 1024px) 42rem, 70vw"
+                  className="block h-full w-full object-contain select-none"
+                  priority={i === 0}
+                />
+              </figure>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

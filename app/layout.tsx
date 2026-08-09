@@ -28,28 +28,56 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://thesolenoid.space"),
+  metadataBase: new URL("https://www.thesolenoid.space"),
   title: {
-    default: "Solomon Adzape — solenoid",
+    default: "Solomon Adzape (solenoid) — Software Engineer",
     template: "%s · Solomon Adzape",
   },
   description:
-    "Solomon Adzape — software engineer building beautiful, functional experiences across AI, desktop, and financial products.",
+    "Portfolio of Solomon Adzape (solenoid), a software engineer building AI, desktop, fintech, and onchain products with React, Next.js, TypeScript, Node.js, and Rust.",
+  applicationName: "Solomon Adzape — Software Engineer",
+  authors: [{ name: "Solomon Adzape", url: "https://www.thesolenoid.space" }],
+  creator: "Solomon Adzape",
+  publisher: "Solomon Adzape",
+  category: "technology",
+  keywords: [
+    "Solomon Adzape",
+    "solenoid",
+    "software engineer",
+    "product engineer",
+    "React developer",
+    "Next.js developer",
+    "TypeScript developer",
+    "Nigeria software engineer",
+    "AI engineer",
+    "fintech engineer",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "Solomon Adzape — solenoid",
+    title: "Solomon Adzape (solenoid) — Software Engineer",
     description:
-      "Software engineer building beautiful, functional experiences across AI, desktop, and financial products.",
-    url: "https://thesolenoid.space",
-    siteName: "thesolenoid.space",
-    images: ["/content/images/file.jpg"],
+      "Software engineer building AI, desktop, fintech, and onchain products.",
+    url: "https://www.thesolenoid.space",
+    siteName: "Solomon Adzape",
+    locale: "en_NG",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     creator: "@0xsolenoid",
-    title: "Solomon Adzape — solenoid",
+    title: "Solomon Adzape (solenoid) — Software Engineer",
     description:
-      "Software engineer building beautiful, functional experiences across AI, desktop, and financial products.",
+      "Software engineer building AI, desktop, fintech, and onchain products.",
   },
 };
 
@@ -65,6 +93,45 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://www.thesolenoid.space/#person",
+        name: "Solomon Adzape",
+        alternateName: "solenoid",
+        url: "https://www.thesolenoid.space",
+        image: "https://www.thesolenoid.space/content/images/file.jpg",
+        jobTitle: "Software Engineer",
+        email: "mailto:adzapesolomon@gmail.com",
+        sameAs: [
+          "https://github.com/solomonadzape95",
+          "https://www.linkedin.com/in/solomonadzape/",
+          "https://x.com/0xsolenoid",
+        ],
+        knowsAbout: [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Node.js",
+          "Rust",
+          "Artificial intelligence",
+          "Financial technology",
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.thesolenoid.space/#website",
+        url: "https://www.thesolenoid.space",
+        name: "Solomon Adzape — Software Engineer",
+        alternateName: "solenoid",
+        inLanguage: "en",
+        author: { "@id": "https://www.thesolenoid.space/#person" },
+      },
+    ],
+  };
+
   return (
     <html
       lang="en"
@@ -75,6 +142,12 @@ export default function RootLayout({
         <ThemeBootstrap />
       </head>
       <body className="font-body text-base text-(--color-ink) bg-(--color-paper)">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          }}
+        />
         <NowPlayingProvider>
           <div className="w-full max-w-[92rem] px-6 lg:pl-16 lg:pr-12 py-10 lg:py-16 overflow-x-clip">
             <div className="lg:grid lg:gap-x-14 lg:grid-cols-[14rem_minmax(0,1fr)]">

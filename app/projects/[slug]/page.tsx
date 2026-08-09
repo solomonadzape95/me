@@ -27,6 +27,13 @@ export const generateMetadata = async ({
   return {
     title: project.name,
     description: project.description,
+    alternates: { canonical: `/projects/${project.slug}` },
+    openGraph: {
+      title: `${project.name} — Solomon Adzape`,
+      description: project.description,
+      url: `/projects/${project.slug}`,
+      type: "article" as const,
+    },
   };
 };
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 
 import { CascadeName } from "@/components/cascade-name";
 import { ProjectMark } from "@/components/project-mark";
@@ -9,6 +10,10 @@ import { getAllProjects } from "@/lib/projects";
 // the home page never falls back to identicons.
 const SELECTED_SLUGS = ["kai", "nebula", "crypt", "aria"];
 
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
 export default async function HomePage() {
   const projects = await getAllProjects();
   const bySlug = new Map(projects.map((p) => [p.slug, p]));
@@ -18,15 +23,15 @@ export default async function HomePage() {
 
   return (
     <SiteShell>
-      <header className="space-y-6 mb-3">
+      <header className="space-y-6">
         <h1 className="font-display font-light leading-[0.95] tracking-tight text-(--color-ink) text-[clamp(2.5rem,7vw,4.75rem)] break-words">
           <CascadeName text="Solomon Adzape" nickname="solenoid" />
         </h1>
-        <div className="max-w-[66ch] space-y-2 leading-relaxed">
-          <p className="text-(--color-ink) text-lg">
+        <div className="max-w-[66ch] lg:max-w-none space-y-2 leading-relaxed">
+          <p className="text-(--color-ink) text-lg lg:whitespace-nowrap">
             Software engineer building beautiful, functional experiences.
           </p>
-          <p className="text-(--color-ink-soft)">
+          <p className="text-(--color-ink-soft) max-w-[66ch]">
             I work across AI, desktop, and financial products—from interaction
             design through systems, integrations, and deployment.
           </p>

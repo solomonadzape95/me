@@ -1,10 +1,16 @@
+import type { Metadata } from "next";
+
 import { CascadeName } from "@/components/cascade-name";
 import { ProjectListClient } from "@/components/project-list-client";
 import { Section, SiteShell } from "@/components/site-shell";
 import { getAllProjects } from "@/lib/projects";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Projects",
+  description:
+    "Selected software engineering projects by Solomon Adzape across AI agents, desktop apps, fintech, developer tools, and onchain products.",
+  alternates: { canonical: "/projects" },
+  openGraph: { url: "/projects" },
 };
 
 export default async function ProjectsIndexPage() {
@@ -12,7 +18,7 @@ export default async function ProjectsIndexPage() {
 
   return (
     <SiteShell>
-      <header className="space-y-5 mb-4">
+      <header className="space-y-5">
         <h1 className="font-display font-light leading-[1.05] tracking-tight text-(--color-ink) text-[clamp(2rem,5vw,3.25rem)]">
           <CascadeName text="here are things I've built..." />
         </h1>

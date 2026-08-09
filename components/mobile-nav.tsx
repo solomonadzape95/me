@@ -165,10 +165,10 @@ export const MobileNav = () => {
                   aria-current={active ? "page" : undefined}
                   onClick={() => setSheet(null)}
                   className={
-                    "block py-0.5 transition-colors duration-150 " +
+                    "rail-link block py-0.5 transition-colors duration-150 " +
                     (active
                       ? "text-(--color-accent) link-underline"
-                      : "text-(--color-ink) hover:text-(--color-accent)")
+                      : "text-(--color-ink)")
                   }
                 >
                   {item.label}

@@ -50,7 +50,7 @@ export const RouteAnimator = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       key={pathname}
-      className="route-in"
+      className="route-in flex flex-col gap-10 lg:gap-14"
       style={
         {
           "--rdx": `${dx * MAG}rem`,

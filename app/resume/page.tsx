@@ -1,9 +1,15 @@
+import type { Metadata } from "next";
+
 import { CascadeName } from "@/components/cascade-name";
 import { Section, SiteShell } from "@/components/site-shell";
 import { PDFViewer } from "@/components/pdf-viewer";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Resume",
+  description:
+    "View or download Solomon Adzape's software engineering resume, including product experience, technical skills, and selected projects.",
+  alternates: { canonical: "/resume" },
+  openGraph: { url: "/resume" },
 };
 
 const RESUME_PATH = "/content/resume/resume.pdf";
@@ -12,7 +18,7 @@ const RESUME_PATH = "/content/resume/resume.pdf";
 export default function ResumePage() {
   return (
     <SiteShell>
-      <header className="space-y-5 mb-4">
+      <header className="space-y-5">
         <div className="flex items-baseline justify-between gap-4">
           <h1 className="font-display font-light leading-[1.05] tracking-tight text-(--color-ink) text-[clamp(2rem,5vw,3.25rem)]">
             <CascadeName text="My portfolio, in a single document." />
@@ -28,4 +34,3 @@ export default function ResumePage() {
     </SiteShell>
   );
 }
-

@@ -41,7 +41,7 @@ export const ProjectMark = ({
   );
   const filterClasses = colorful
     ? "opacity-100"
-    : "grayscale opacity-70 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100 group-focus-visible:grayscale-0 group-focus-visible:opacity-100";
+    : "grayscale opacity-70 max-lg:grayscale-0 max-lg:opacity-100 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100 group-focus-visible:grayscale-0 group-focus-visible:opacity-100";
 
   return (
     <span

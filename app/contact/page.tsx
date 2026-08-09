@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
+
 import { CascadeName } from "@/components/cascade-name";
 import { Section, SiteShell } from "@/components/site-shell";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Contact",
+  description:
+    "Contact Solomon Adzape for software engineering, product development, and collaboration opportunities.",
+  alternates: { canonical: "/contact" },
+  openGraph: { url: "/contact" },
 };
 
 type Link = { label: string; value: string; href: string };
@@ -33,7 +39,7 @@ const LINKS: Link[] = [
 export default function ContactPage() {
   return (
     <SiteShell>
-      <header className="space-y-5 mb-4">
+      <header className="space-y-5">
         <h1 className="font-display font-light leading-[1.05] tracking-tight text-(--color-ink) text-[clamp(2rem,5vw,3.25rem)]">
           <CascadeName text="Open to talk." />
         </h1>

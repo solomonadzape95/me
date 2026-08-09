@@ -1,12 +1,17 @@
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 
 import accavePng from "@/assets/accave.png";
 import { CascadeName } from "@/components/cascade-name";
 import { Section, SiteShell } from "@/components/site-shell";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "About",
+  description:
+    "About Solomon Adzape: software engineer and product builder working across web, desktop, AI, fintech, and onchain systems.",
+  alternates: { canonical: "/about" },
+  openGraph: { url: "/about" },
 };
 
 type Job = {
@@ -93,7 +98,7 @@ const SKILLS: Skill[] = [
 export default function AboutPage() {
   return (
     <SiteShell>
-      <header className="space-y-5 mb-4">
+      <header className="space-y-5">
         <h1 className="font-display font-light leading-[1.05] tracking-tight text-(--color-ink) text-[clamp(2rem,5vw,3.25rem)]">
           <CascadeName text="Software engineer. Product builder." />
         </h1>
