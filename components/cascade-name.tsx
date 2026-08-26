@@ -43,13 +43,36 @@ const renderChars = (
     </span>
   ));
 
+const renderWords = (text: string) => {
+  let offset = 0;
+
+  return text.split(/(\s+)/).map((token, tokenIndex) => {
+    const start = offset;
+    offset += token.length;
+
+    if (/^\s+$/.test(token)) {
+      return (
+        <span key={tokenIndex} className="cn-char" data-cn-space="true" aria-hidden="true">
+          &nbsp;
+        </span>
+      );
+    }
+
+    return (
+      <span key={tokenIndex} className="inline-block whitespace-nowrap">
+        {renderChars(token, "cn-char", start)}
+      </span>
+    );
+  });
+};
+
 export const CascadeName = ({ text, nickname, className }: Props) => {
   const [showNickname, setShowNickname] = useState(false);
 
   if (!nickname) {
     return (
       <span className={className}>
-        {renderChars(text, "cn-char")}
+        {renderWords(text)}
         <span className="sr-only">{text}</span>
       </span>
     );

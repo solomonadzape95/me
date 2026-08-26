@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { CascadeName } from "@/components/cascade-name";
 import { ProjectListClient } from "@/components/project-list-client";
 import { Section, SiteShell } from "@/components/site-shell";
 import { getAllProjects } from "@/lib/projects";
@@ -13,19 +12,30 @@ export const metadata: Metadata = {
   openGraph: { url: "/projects" },
 };
 
-export default async function ProjectsIndexPage() {
+export default async function ProjectsIndexPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ type?: string }>;
+}) {
   const projects = await getAllProjects();
+  const { type } = await searchParams;
+  const initialType =
+    type === "web" ||
+    type === "desktop" ||
+    type === "extension" ||
+    type === "onchain"
+      ? type
+      : undefined;
 
   return (
     <SiteShell>
       <header className="space-y-5">
-        <h1 className="font-display font-light leading-[1.05] tracking-tight text-(--color-ink) text-[clamp(2rem,5vw,3.25rem)]">
-          <CascadeName text="here are things I've built..." />
-        </h1>
+        <h1 className="page-title">things i&apos;ve built.</h1>
       </header>
 
-      <Section label="projects" count={projects.length}>
+      <Section label="projects" count={initialType ? undefined : projects.length}>
         <ProjectListClient
+          initialType={initialType}
           projects={projects.map((p) => ({
             slug: p.slug,
             name: p.name,
@@ -34,6 +44,8 @@ export default async function ProjectsIndexPage() {
             status: p.status,
             logo: p.logo,
             stack: p.stack,
+            github: p.github,
+            website: p.website,
             thumb: p.thumbnail ?? p.images[0],
           }))}
         />

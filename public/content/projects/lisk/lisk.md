@@ -1,7 +1,7 @@
 ---
 published: true
 name: lisk-dashboard
-description: a data-analysis dashboard for two tokens on the lisk chain.
+description: an analytics dashboard for lzar and lusd activity on the lisk chain.
 thumbnail: Screenshot_From_2025-10-03_15-20-09.png
 images: [Screenshot_From_2025-10-03_15-20-09.png, Screenshot_From_2025-10-03_15-20-16.png, Screenshot_From_2025-10-03_15-20-21.png, Screenshot_From_2025-10-03_15-20-26.png]
 stack: [next.js, moralis, react query, prisma, recharts]
@@ -10,9 +10,10 @@ website: liskanlytics.vercel.app
 date: 2025-07-20
 status: shipped
 ---
-## stack
-nextjs, api routes, typescript, moralis apis, react query, prisma, recharts
-## idea
-this was a clients project so the idea wasn't mine, the task was initially to build a dune dashboard data analytics project from two tokens on the lisk chain (lzar and lusd)
-## implementation
-the data for these tokens were not indexed on dune. i confirmed this through some emails i exchanged with them. so i looked for other ways to get and render blockchain data and i came across [moralis](moralis.com) and using their api i wired a nextjs dashboard up with the necessary data. i used recharts on shadcn to render the charts and i persisted data with a simple prisma db.
+## brief
+
+this was a client project for tracking two tokens on lisk: lzar and lusd. the original plan was a dune dashboard, but neither token was indexed there.
+
+## what i did
+
+i moved the data pipeline to [moralis](https://moralis.com), wired its api into a next.js dashboard, persisted the results with prisma, and built the charts with recharts.

@@ -7,16 +7,16 @@
 @theme {
   /* Roles, not values. Components reference these. Values live in the
      [data-theme] blocks below. */
-  --color-paper: oklch(0.97 0.012 75);
-  --color-ink: oklch(0.20 0.018 60);
-  --color-ink-soft: oklch(0.45 0.014 65);
-  --color-rule: oklch(0.20 0.018 60 / 0.14);
-  --color-accent: oklch(0.62 0.20 32);
-  --color-accent-soft: oklch(0.62 0.20 32 / 0.18);
+  --color-paper: #f4f2ec;
+  --color-ink: #11110f;
+  --color-ink-soft: #68665f;
+  --color-rule: rgb(17 17 15 / 0.14);
+  --color-accent: #c84f32;
+  --color-accent-soft: rgb(200 79 50 / 0.16);
 
-  --font-display: var(--font-spectral), ui-serif, Georgia, serif;
-  --font-body: var(--font-dm-mono), ui-monospace, SFMono-Regular, monospace;
-  --font-mono: var(--font-dm-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-display: var(--font-maple-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-body: var(--font-maple-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-mono: var(--font-maple-mono), ui-monospace, SFMono-Regular, monospace;
 
   --space-xs: 0.25rem;   /*  4px */
   --space-sm: 0.5rem;    /*  8px */
@@ -36,33 +36,33 @@
 /* Light theme is the default. */
 :root,
 :root[data-theme="light"] {
-  --color-paper: oklch(0.97 0.012 75);
-  --color-ink: oklch(0.20 0.018 60);
-  --color-ink-soft: oklch(0.45 0.014 65);
-  --color-rule: oklch(0.20 0.018 60 / 0.14);
-  --color-accent: oklch(0.62 0.20 32);
-  --color-accent-soft: oklch(0.62 0.20 32 / 0.18);
+  --color-paper: #f4f2ec;
+  --color-ink: #11110f;
+  --color-ink-soft: #68665f;
+  --color-rule: rgb(17 17 15 / 0.14);
+  --color-accent: #c84f32;
+  --color-accent-soft: rgb(200 79 50 / 0.16);
 }
 
 :root[data-theme="dark"] {
-  --color-paper: oklch(0.13 0.014 60);
-  --color-ink: oklch(0.92 0.008 75);
-  --color-ink-soft: oklch(0.68 0.010 70);
-  --color-rule: oklch(0.92 0.008 75 / 0.16);
-  --color-accent: oklch(0.72 0.20 32);
-  --color-accent-soft: oklch(0.72 0.20 32 / 0.22);
+  --color-paper: #090909;
+  --color-ink: #f4f2ec;
+  --color-ink-soft: #aaa79f;
+  --color-rule: rgb(244 242 236 / 0.16);
+  --color-accent: #ff7959;
+  --color-accent-soft: rgb(255 121 89 / 0.2);
 }
 
 /* If the visitor has not chosen, follow the system. The toggle sets
    [data-theme] explicitly and that wins. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --color-paper: oklch(0.13 0.014 60);
-    --color-ink: oklch(0.92 0.008 75);
-    --color-ink-soft: oklch(0.68 0.010 70);
-    --color-rule: oklch(0.92 0.008 75 / 0.16);
-    --color-accent: oklch(0.72 0.20 32);
-    --color-accent-soft: oklch(0.72 0.20 32 / 0.22);
+    --color-paper: #090909;
+    --color-ink: #f4f2ec;
+    --color-ink-soft: #aaa79f;
+    --color-rule: rgb(244 242 236 / 0.16);
+    --color-accent: #ff7959;
+    --color-accent-soft: rgb(255 121 89 / 0.2);
   }
 }
 
@@ -106,6 +106,25 @@ body {
   font-variant-numeric: tabular-nums lining-nums;
 }
 
+.font-brand {
+  font-family: var(--font-selera), ui-serif, Georgia, serif;
+  font-feature-settings: "kern", "liga";
+}
+
+.project-card {
+  background: var(--project-color, #28282f);
+  color: #f8f7f2;
+}
+
+.project-card .project-card-muted {
+  color: color-mix(in srgb, currentColor 68%, transparent);
+}
+
+.experience-card {
+  background: var(--experience-color, #3f4652);
+  border-color: color-mix(in srgb, white 14%, transparent);
+}
+
 ::selection {
   background: var(--color-accent-soft);
   color: var(--color-ink);
@@ -125,6 +144,10 @@ a {
 .rail-link:hover,
 .rail-link:focus-visible {
   color: var(--color-accent);
+}
+
+.rail-link[aria-current="page"] {
+  color: var(--color-accent) !important;
 }
 
 /* -----------------------------------------------------------------------------
@@ -285,10 +308,24 @@ a {
 
 .label-mono {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-ink-soft);
+}
+
+.label-mono.link-underline {
+  font-size: 0.875rem;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+  text-transform: lowercase;
 }
 
 .link-underline {

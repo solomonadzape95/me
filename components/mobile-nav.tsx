@@ -1,10 +1,12 @@
 "use client";
 
+import { List } from "@phosphor-icons/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Avatar } from "./avatar";
+import { CommandHint } from "./command-hint";
 import { LocationMap } from "./location-map";
 import { NowPlaying, useNowPlaying } from "./now-playing";
 import { ThemeToggle } from "./theme-toggle";
@@ -15,8 +17,12 @@ const NAV: { label: string; href: string }[] = [
   { label: "home", href: "/" },
   { label: "about", href: "/about" },
   { label: "projects", href: "/projects" },
+  { label: "videos", href: "/videos" },
+  { label: "blog", href: "/blog" },
   { label: "contact", href: "/contact" },
   { label: "resume", href: "/resume" },
+  { label: "changelog", href: "/changelog" },
+  { label: "colophon", href: "/colophon" },
 ];
 
 const isActive = (pathname: string, href: string) =>
@@ -61,7 +67,7 @@ export const MobileNav = () => {
   }, [sheet]);
 
   const playing = data?.playing ?? false;
-  const art = playing ? data?.art : undefined;
+  const art = data?.art;
 
   return (
     <div className="lg:hidden">
@@ -77,24 +83,16 @@ export const MobileNav = () => {
           onClick={() => setSheet(sheet === "nav" ? null : "nav")}
           className="h-12 w-12 grid place-items-center bg-(--color-paper) border border-(--color-rule) text-(--color-ink) hover:text-(--color-accent) hover:border-(--color-accent) transition-colors duration-150 shadow-[0_2px_12px_rgba(0,0,0,0.08)]"
         >
-          <svg
-            viewBox="0 0 16 16"
-            width="18"
-            height="18"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.25"
-            aria-hidden="true"
-          >
-            <line x1="2.5" y1="4" x2="13.5" y2="4" />
-            <line x1="2.5" y1="8" x2="13.5" y2="8" />
-            <line x1="2.5" y1="12" x2="13.5" y2="12" />
-          </svg>
+          <List size={20} weight="bold" aria-hidden="true" />
         </button>
         <button
           type="button"
           aria-label={
-            playing ? `now playing — ${data?.title ?? ""}` : "now playing"
+            playing
+              ? `now playing — ${data?.title ?? ""}`
+              : data?.title
+                ? `last played — ${data.title}`
+                : "listening status"
           }
           aria-expanded={sheet === "now"}
           onClick={() => setSheet(sheet === "now" ? null : "now")}
@@ -142,20 +140,18 @@ export const MobileNav = () => {
         }
       >
         <div className="px-6 pt-8 pb-12 space-y-10 font-mono text-[0.86rem] leading-relaxed">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 border-b border-(--color-rule) pb-6">
             <Avatar size={40} />
             <Link
               href="/"
               onClick={() => setSheet(null)}
-              className="block font-display text-(--color-ink) text-xl leading-tight tracking-tight hover:text-(--color-accent) transition-colors duration-150"
+              className="font-brand block lowercase text-(--color-ink) text-[2.5rem] leading-none tracking-[0.025em] hover:text-(--color-accent) transition-colors duration-150"
             >
-              Solomon
-              <br />
-              Adzape
+              solenoid
             </Link>
           </div>
 
-          <nav aria-label="primary" className="space-y-1.5 text-[0.92rem]">
+          <nav aria-label="primary" className="space-y-1.5 border-b border-(--color-rule) pb-6 text-[0.94rem]">
             {NAV.map((item) => {
               const active = isActive(pathname, item.href);
               return (
@@ -181,9 +177,12 @@ export const MobileNav = () => {
 
           <NowPlaying />
 
-          <div className="rule-top pt-4 flex items-center justify-between label-mono">
+          <div className="rule-top flex flex-col items-start gap-2 pt-4 label-mono">
             <ThemeToggle />
-            <span>© {new Date().getFullYear()}</span>
+            <CommandHint />
+            <div className="pt-1 text-[0.7rem] leading-relaxed text-(--color-ink-soft)">
+              © {new Date().getFullYear()} SOLOMON ADZAPE
+            </div>
           </div>
         </div>
       </aside>

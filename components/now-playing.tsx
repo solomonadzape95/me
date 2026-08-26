@@ -8,6 +8,11 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import {
+  ClockCounterClockwise,
+  MusicNotes,
+  Waveform,
+} from "@phosphor-icons/react";
 
 import { ScrollingText } from "./scrolling-text";
 
@@ -65,7 +70,8 @@ export const NowPlayingProvider = ({ children }: { children: ReactNode }) => {
 export const NowPlaying = () => {
   const data = useNowPlaying();
   const playing = data?.playing ?? false;
-  const art = playing ? data?.art : undefined;
+  const art = data?.art;
+  const hasTrack = Boolean(data?.title && data?.artist);
 
   const body = (
     <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 items-center">
@@ -77,26 +83,26 @@ export const NowPlaying = () => {
           width={64}
           height={64}
           loading="lazy"
-          className="block h-14 w-14 border border-(--color-rule) object-cover shrink-0"
+          className="block h-[4.5rem] w-[4.5rem] rounded-[10px] border border-(--color-rule) object-cover shrink-0"
         />
       ) : (
         <span
           aria-hidden="true"
-          className="inline-flex h-14 w-14 items-center justify-center border border-(--color-rule) shrink-0"
+          className="inline-flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-[10px] border border-(--color-rule) shrink-0"
         >
-          <span
-            className={
-              "inline-block h-2 w-2 rounded-full " +
-              (playing
-                ? "bg-(--color-accent) animate-pulse"
-                : "bg-(--color-rule)")
-            }
-          />
+          <MusicNotes size={22} weight="duotone" className="text-(--color-ink-soft)" />
         </span>
       )}
       <div className="min-w-0">
-        <div className="label-mono">{playing ? "now playing" : "now"}</div>
-        {playing && data ? (
+        <div className="label-mono flex items-center gap-1.5">
+          {playing ? (
+            <Waveform size={13} weight="bold" className="text-(--color-accent) animate-pulse" />
+          ) : (
+            <ClockCounterClockwise size={13} weight="duotone" />
+          )}
+          <span>{playing ? "now playing" : hasTrack ? "last played" : "listening"}</span>
+        </div>
+        {hasTrack && data ? (
           <>
             <ScrollingText
               text={data.title ?? ""}
@@ -109,13 +115,13 @@ export const NowPlaying = () => {
             />
           </>
         ) : (
-          <div className="text-(--color-ink-soft) text-[0.78rem]">idle</div>
+          <div className="text-(--color-ink-soft) text-[0.74rem]">unavailable</div>
         )}
       </div>
     </div>
   );
 
-  if (playing && data?.url) {
+  if (data?.url) {
     return (
       <a
         href={data.url}

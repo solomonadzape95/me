@@ -14,8 +14,12 @@ const PAGES: { label: string; href: string }[] = [
   { label: "home", href: "/" },
   { label: "about", href: "/about" },
   { label: "projects", href: "/projects" },
+  { label: "videos", href: "/videos" },
+  { label: "blog", href: "/blog" },
   { label: "contact", href: "/contact" },
   { label: "resume", href: "/resume" },
+  { label: "changelog", href: "/changelog" },
+  { label: "colophon", href: "/colophon" },
 ];
 
 const applyTheme = (theme: "light" | "dark") => {
@@ -41,7 +45,12 @@ export const CommandPalette = ({ projects }: Props) => {
       }
     };
     document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    const onOpen = () => setOpen(true);
+    window.addEventListener("open-command-palette", onOpen);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      window.removeEventListener("open-command-palette", onOpen);
+    };
   }, []);
 
   const run = (fn: () => void) => {
@@ -158,6 +167,56 @@ export const CommandPalette = ({ projects }: Props) => {
             theme — dark
           </Command.Item>
           <Command.Item
+            value="action search projects"
+            onSelect={() => run(() => router.push("/projects?focus=search"))}
+            className="px-3 py-2 cursor-pointer data-[selected=true]:bg-(--color-accent-soft) data-[selected=true]:text-(--color-accent)"
+          >
+            search projects
+          </Command.Item>
+          <Command.Item
+            value="action filter web projects"
+            onSelect={() => run(() => router.push("/projects?type=web"))}
+            className="px-3 py-2 cursor-pointer data-[selected=true]:bg-(--color-accent-soft) data-[selected=true]:text-(--color-accent)"
+          >
+            show web projects
+          </Command.Item>
+          <Command.Item
+            value="action filter desktop projects"
+            onSelect={() => run(() => router.push("/projects?type=desktop"))}
+            className="px-3 py-2 cursor-pointer data-[selected=true]:bg-(--color-accent-soft) data-[selected=true]:text-(--color-accent)"
+          >
+            show desktop projects
+          </Command.Item>
+          <Command.Item
+            value="action filter browser extension projects"
+            onSelect={() => run(() => router.push("/projects?type=extension"))}
+            className="px-3 py-2 cursor-pointer data-[selected=true]:bg-(--color-accent-soft) data-[selected=true]:text-(--color-accent)"
+          >
+            show browser extensions
+          </Command.Item>
+          <Command.Item
+            value="action filter onchain projects"
+            onSelect={() => run(() => router.push("/projects?type=onchain"))}
+            className="px-3 py-2 cursor-pointer data-[selected=true]:bg-(--color-accent-soft) data-[selected=true]:text-(--color-accent)"
+          >
+            show onchain projects
+          </Command.Item>
+          <Command.Item
+            value="action about solenoid name story"
+            onSelect={() =>
+              run(() => {
+                router.push("/");
+                window.setTimeout(
+                  () => window.dispatchEvent(new Event("open-solenoid-story")),
+                  350,
+                );
+              })
+            }
+            className="px-3 py-2 cursor-pointer data-[selected=true]:bg-(--color-accent-soft) data-[selected=true]:text-(--color-accent)"
+          >
+            about the name “solenoid”
+          </Command.Item>
+          <Command.Item
             value="action open github"
             onSelect={() =>
               run(() =>
@@ -171,6 +230,36 @@ export const CommandPalette = ({ projects }: Props) => {
             className="px-3 py-2 cursor-pointer data-[selected=true]:bg-(--color-accent-soft) data-[selected=true]:text-(--color-accent)"
           >
             open github
+          </Command.Item>
+          <Command.Item
+            value="action open instagram"
+            onSelect={() =>
+              run(() =>
+                window.open(
+                  "https://www.instagram.com/0xsolenoid/",
+                  "_blank",
+                  "noreferrer",
+                ),
+              )
+            }
+            className="px-3 py-2 cursor-pointer data-[selected=true]:bg-(--color-accent-soft) data-[selected=true]:text-(--color-accent)"
+          >
+            open instagram
+          </Command.Item>
+          <Command.Item
+            value="action open discord"
+            onSelect={() =>
+              run(() =>
+                window.open(
+                  "https://discordapp.com/users/0xsolenoid",
+                  "_blank",
+                  "noreferrer",
+                ),
+              )
+            }
+            className="px-3 py-2 cursor-pointer data-[selected=true]:bg-(--color-accent-soft) data-[selected=true]:text-(--color-accent)"
+          >
+            open discord
           </Command.Item>
           <Command.Item
             value="action email"

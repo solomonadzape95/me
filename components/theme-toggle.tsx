@@ -24,10 +24,16 @@ export const ThemeToggle = () => {
 
   useEffect(() => {
     setTheme(readTheme());
+    const observer = new MutationObserver(() => setTheme(readTheme()));
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+    return () => observer.disconnect();
   }, []);
 
   const toggle = () => {
-    const next: Theme = theme === "dark" ? "light" : "dark";
+    const next: Theme = theme === "light" ? "dark" : "light";
     applyTheme(next);
     setTheme(next);
   };
@@ -36,11 +42,11 @@ export const ThemeToggle = () => {
     <button
       type="button"
       onClick={toggle}
-      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-      className="label-mono inline-flex items-center gap-2 hover:text-(--color-accent) transition-colors duration-150"
+      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
+      title={`Current theme: ${theme}`}
+      className="px-1.5 py-1 text-[0.72rem] uppercase tracking-[0.055em] text-(--color-ink-soft) transition-colors hover:text-(--color-accent)"
     >
-      <span aria-hidden="true">{theme === "dark" ? "◐" : "◑"}</span>
-      <span>{theme === "dark" ? "light" : "dark"}</span>
+      {theme}
     </button>
   );
 };

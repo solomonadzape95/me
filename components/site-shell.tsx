@@ -14,19 +14,20 @@ export const SiteShell = ({ children }: { children: ReactNode }) => (
 type SectionProps = {
   label: string;
   count?: number;
+  action?: ReactNode;
   children: ReactNode;
   id?: string;
 };
 
-export const Section = ({ label, count, children, id }: SectionProps) => (
+export const Section = ({ label, count, action, children, id }: SectionProps) => (
   <section id={id} className="space-y-8">
     <header className="flex items-baseline justify-between border-b border-(--color-rule) pb-3">
       <h2 className="label-mono">{label}</h2>
-      {count != null && (
+      {action ?? (count != null && (
         <span className="label-mono text-(--color-rule) tabular-nums">
           [{count}]
         </span>
-      )}
+      ))}
     </header>
     <div className="space-y-6 pt-1 pb-6">{children}</div>
   </section>

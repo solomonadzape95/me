@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Location panel for the left rail. Uses a free CartoDB Positron raster
  * tile (no API key) for Lagos with a small vermillion pin overlaid at the
@@ -5,10 +7,11 @@
  */
 
 import { LocationTime } from "./location-time";
+import { MapPin } from "@phosphor-icons/react";
 
 const LON = 3.3792;
 const LAT = 6.5244;
-const ZOOM = 8;
+const ZOOM = 11;
 
 // Web Mercator math — tile coordinates at the given zoom + the fractional
 // position of (LON, LAT) inside the tile, so the pin lands on the city.
@@ -30,33 +33,37 @@ const pinYPct = (tileYFrac - tileY) * 100;
 const TILE_URL = `https://a.basemaps.cartocdn.com/light_all/${ZOOM}/${tileX}/${tileY}@2x.png`;
 
 export const LocationMap = ({ className }: { className?: string }) => (
-  <div className={"space-y-2 " + (className ?? "")}>
+  <div className={className ?? ""}>
     <a
       href={`https://www.openstreetmap.org/#map=10/${LAT}/${LON}`}
       target="_blank"
       rel="noreferrer"
-      className="group block"
+      className="group grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3"
       aria-label="View Lagos on OpenStreetMap"
     >
-      <div className="relative w-full aspect-square border border-(--color-rule) overflow-hidden">
+      <div className="relative h-[4.5rem] w-[4.5rem] shrink-0 overflow-hidden rounded-[10px] border border-(--color-rule) bg-[#e8e4d2]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={TILE_URL}
-          alt="Lagos"
+          alt="Map of Lagos"
           loading="lazy"
           decoding="async"
-          className="block w-full h-full object-cover grayscale opacity-80 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100"
+          className="block h-full w-full object-cover contrast-[1.08] saturate-[0.9] opacity-90 transition-[filter,opacity] duration-200 group-hover:saturate-100 group-hover:opacity-100"
         />
-        <span
+        <MapPin
           aria-hidden="true"
+          size={21}
+          weight="fill"
           style={{ left: `${pinXPct}%`, top: `${pinYPct}%` }}
-          className="absolute -translate-x-1/2 -translate-y-1/2 block w-2.5 h-2.5 rounded-full bg-(--color-accent) ring-2 ring-(--color-accent)/30"
+          className="absolute -translate-x-1/2 -translate-y-full text-(--color-accent) drop-shadow-sm"
         />
       </div>
+      <div className="min-w-0">
+        <div className="label-mono normal-case tracking-[0.04em] text-(--color-ink-soft) transition-colors group-hover:text-(--color-accent)">
+          in lagos · utc+1
+        </div>
+        <LocationTime />
+      </div>
     </a>
-    <div className="label-mono normal-case tracking-[0.04em]">
-      lagos · UTC+1
-    </div>
-    <LocationTime />
   </div>
 );

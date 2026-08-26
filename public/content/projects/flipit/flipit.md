@@ -10,11 +10,14 @@ website: https://flipit-kappa.vercel.app/
 date: 2025-11-01
 status: in-progress
 ---
-## stack
-next.js 14, wagmi, viem, prisma, postgres/supabase, neynar (farcaster), erc20 transactions on celo, minipay-ready
+## overview
 
-## about
-flipit is a small on-chain game. players pay a cusd entry fee, can buy power-ups during play, and compete for a daily leaderboard payout. a vercel cron settles the day's leaderboard and disburses to the winning wallets.
+flipit is a small onchain memory game. players enter with cusd, buy power-ups during a round, and compete for the daily leaderboard payout.
 
-## notes
-deployed only for testing so far — keep an eye on the cron job and the entry-fee contract balance before publishing.
+## how it works
+
+wallet actions run through wagmi and viem on celo. prisma stores game and leaderboard data, while a scheduled job closes each day and pays the winning wallets.
+
+## current state
+
+the deployment is for testing. the payout job and entry-fee balance still need production safeguards.

@@ -16,8 +16,12 @@ const POSITIONS: Record<string, [number, number]> = {
   "/": [0, 0],
   "/about": [-1.5, 1],
   "/projects": [-0.5, 1],
-  "/contact": [0.5, 1],
+  "/videos": [0, 1],
+  "/blog": [0.5, 1],
+  "/contact": [1, 1],
   "/resume": [1.5, 1],
+  "/changelog": [2, 1],
+  "/colophon": [2.5, 1],
 };
 
 const positionOf = (path: string): [number, number] => {

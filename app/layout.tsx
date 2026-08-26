@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Spectral, DM_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 
 import "./globals.css";
@@ -11,19 +11,20 @@ import { RouteAnimator } from "@/components/route-animator";
 import { SiteRail } from "@/components/site-rail";
 import { ThemeBootstrap } from "@/components/theme-bootstrap";
 
-const spectral = Spectral({
-  variable: "--font-spectral",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  style: ["normal", "italic"],
+const selera = localFont({
+  src: "../public/fonts/selera-regular.ttf",
+  variable: "--font-selera",
   display: "swap",
 });
 
-const dmMono = DM_Mono({
-  variable: "--font-dm-mono",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
+const mapleMono = localFont({
+  src: [
+    { path: "../public/fonts/maple-mono-regular.ttf", weight: "400" },
+    { path: "../public/fonts/maple-mono-medium.ttf", weight: "500" },
+    { path: "../public/fonts/maple-mono-semibold.ttf", weight: "600" },
+    { path: "../public/fonts/maple-mono-bold.ttf", weight: "700" },
+  ],
+  variable: "--font-maple-mono",
   display: "swap",
 });
 
@@ -85,8 +86,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f0e6" },
-    { media: "(prefers-color-scheme: dark)", color: "#1d1a16" },
+    { media: "(prefers-color-scheme: light)", color: "#f4f2ec" },
+    { media: "(prefers-color-scheme: dark)", color: "#090909" },
   ],
 };
 
@@ -109,6 +110,8 @@ export default function RootLayout({
           "https://github.com/solomonadzape95",
           "https://www.linkedin.com/in/solomonadzape/",
           "https://x.com/0xsolenoid",
+          "https://www.instagram.com/0xsolenoid/",
+          "https://discordapp.com/users/0xsolenoid",
         ],
         knowsAbout: [
           "React",
@@ -136,12 +139,12 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${spectral.variable} ${dmMono.variable}`}
+      className={`${selera.variable} ${mapleMono.variable}`}
     >
       <head>
         <ThemeBootstrap />
       </head>
-      <body className="font-body text-base text-(--color-ink) bg-(--color-paper)">
+      <body className="font-body text-[1.0625rem] text-(--color-ink) bg-(--color-paper)">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -150,13 +153,13 @@ export default function RootLayout({
         />
         <NowPlayingProvider>
           <div className="w-full max-w-[92rem] px-6 lg:pl-16 lg:pr-12 py-10 lg:py-16 overflow-x-clip">
-            <div className="lg:grid lg:gap-x-14 lg:grid-cols-[14rem_minmax(0,1fr)]">
+            <div className="relative">
               {/* Rail is desktop-only. On smaller viewports MobileNav renders
                   the floating buttons + drawer instead. */}
-              <aside className="hidden lg:block lg:sticky lg:top-12 lg:self-start">
+              <aside className="hidden lg:block lg:fixed lg:left-16 lg:top-2 lg:w-56">
                 <SiteRail />
               </aside>
-              <main className="min-w-0">
+              <main className="min-w-0 lg:ml-[17.5rem]">
                 <RouteAnimator>{children}</RouteAnimator>
               </main>
             </div>

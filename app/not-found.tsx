@@ -7,9 +7,7 @@ export default function NotFound() {
     <SiteShell>
       <header className="space-y-5">
         <p className="label-mono">404 · not found</p>
-        <h1 className="font-display font-light leading-[1.0] tracking-tight text-(--color-ink) text-[clamp(2.5rem,6vw,4rem)]">
-          This page does not exist.
-        </h1>
+        <h1 className="page-title text-[clamp(2.5rem,6vw,4rem)]">nothing here.</h1>
       </header>
 
       <Section label="elsewhere">

@@ -1,8 +1,9 @@
 ---
 published: true
 name: envelope
-description: a cli tool for securely sharing env secrets with cryptography.
+description: a cli for encrypting and sharing environment secrets without leaving the terminal.
 thumbnail: ascii-art-text.png
+logo: logo.svg
 images: [ascii-art-text.png, Screenshot_From_2025-10-03_15-34-09.png, Screenshot_From_2025-10-03_15-35-21.png]
 stack: [commander, typescript, chalk, node.js]
 github: github.com/solomonadzape95/envelope.git
@@ -10,11 +11,14 @@ website: https://www.npmjs.com/package/envelope-cli
 date: 2025-09-16
 status: shipped
 ---
-## stack
-commander, typescript, chalk, nodejs
-## inspo
-while dual-booting, i had to make some changes to a codebase i created in the other os, and sadly i had to go back to it and get them. also at the same time i was collaborating on a project and had to get the env secrets and this was causing a fuss so i thought there'd be some way to fix it and on doing some research, just felt like building mine :)
-## idea
-the idea was to create a cli tool that can help solve my problems and help teams and individuals move their env secrets securely. something that would be easy to use and not require going to your browser in the best case scenario
-## implementation
-it uses a combo of asymmetric and symmetric cryptography to lock secrets, lock the keys and share them as encrypted files in the codebase.
+## why i built it
+
+i kept switching operating systems and collaborating on projects where moving environment secrets was awkward. i wanted a terminal-first way to share them without pasting values into chat or opening another service.
+
+## how it works
+
+envelope combines symmetric and asymmetric cryptography. it encrypts the secrets and their key separately, then packages the encrypted files so they can travel with the codebase without exposing the original values.
+
+## built with
+
+node.js, typescript, commander, and chalk.

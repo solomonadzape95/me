@@ -5,8 +5,9 @@ import type { Metadata } from "next";
 import accavePng from "@/assets/accave.png";
 import linternSvg from "@/assets/lintern.svg";
 import vendeorPng from "@/assets/logo.png";
-import { CascadeName } from "@/components/cascade-name";
 import { Section, SiteShell } from "@/components/site-shell";
+import { SolenoidName } from "@/components/solenoid-name";
+import { ToolChipGrid } from "@/components/tool-chip-grid";
 
 export const metadata: Metadata = {
   title: "About",
@@ -24,6 +25,7 @@ type Job = {
   blurb: string;
   logo?: StaticImageData | string;
   href?: string;
+  color: string;
   bigLogo?: boolean;
   darkBackdrop?: boolean;
 };
@@ -37,6 +39,7 @@ const JOBS: Job[] = [
     blurb:
       "Shipped a responsive storefront and reusable component system, then owned Paystack checkout, ordering, and admin analytics across the frontend and REST APIs.",
     logo: vendeorPng,
+    color: "#2e4663",
   },
   {
     company: "Lintern",
@@ -46,6 +49,7 @@ const JOBS: Job[] = [
     blurb:
       "Co-led the frontend of a Web3 learning platform, building interactive React interfaces, dashboards, and onchain certificate and reward flows.",
     logo: linternSvg,
+    color: "#6a3f49",
   },
   {
     company: "Accave",
@@ -56,46 +60,7 @@ const JOBS: Job[] = [
       "Built cross-device learning experiences and dashboards while also producing educational media for complex technical subjects.",
     logo: accavePng,
     href: "https://accave.com",
-  },
-];
-
-type Skill = { label: string; items: string[] };
-
-const SKILLS: Skill[] = [
-  {
-    label: "lang",
-    items: ["HTML", "CSS / SCSS", "JS / TS", "Python", "Solidity", "Bash", "SQL"],
-  },
-  {
-    label: "frame",
-    items: [
-      "React",
-      "Next.js",
-      "Tauri",
-      "Node.js",
-      "Express",
-      "FastAPI",
-      "Tailwind",
-      "Git",
-      "Vercel",
-    ],
-  },
-  { label: "db", items: ["PostgreSQL", "MongoDB", "Firestore"] },
-  {
-    label: "focus",
-    items: ["Product engineering", "AI agents", "Desktop", "Fintech"],
-  },
-  {
-    label: "tools",
-    items: [
-      "VS Code",
-      "Cursor",
-      "Remix",
-      "Postman",
-      "Linux",
-      "After Effects",
-      "Illustrator",
-    ],
+    color: "#76503b",
   },
 ];
 
@@ -103,31 +68,49 @@ export default function AboutPage() {
   return (
     <SiteShell>
       <header className="space-y-5">
-        <h1 className="font-display font-light leading-[1.05] tracking-tight text-(--color-ink) text-[clamp(2rem,5vw,3.25rem)]">
-          <CascadeName text="Software engineer. Product builder." />
-        </h1>
+        <h1 className="page-title">a little about me.</h1>
       </header>
 
       <Section label="bio">
         <div className="space-y-4 leading-relaxed mb-4">
           <p>
-            I&apos;m a software engineer with more than four years of experience
-            building responsive products across web applications, desktop
-            software, browser extensions, and onchain systems.
+            hey, i&apos;m solomon. i&apos;m a software engineer and computer science
+            student at the university of nigeria, nsukka. online, i usually go
+            by <SolenoidName />.
           </p>
           <p>
-            I work mainly with React, Next.js, TypeScript, and Node.js, but I&apos;m
-            comfortable owning a product beyond its interface—across APIs,
-            databases, AI integrations, native bridges, and deployment.
+            i&apos;ve spent the last four years making products for the{" "}
+            <Link href="/projects?type=web" className="link-underline">
+              web
+            </Link>{" "}
+            and{" "}
+            <Link href="/projects?type=desktop" className="link-underline">
+              desktop
+            </Link>
+            , with a few browser{" "}
+            <Link href="/projects?type=extension" className="link-underline">
+              extensions
+            </Link>{" "}
+            and{" "}
+            <Link href="/projects?type=onchain" className="link-underline">
+              onchain
+            </Link>{" "}
+            systems along the way. i work mostly with typescript, react,
+            next.js, and node.js.
           </p>
           <p>
-            I&apos;m currently completing a B.Sc. in Computer Science at the
-            University of Nigeria, Nsukka. Selected work lives on{" "}
+            i like taking a product from a rough idea to something people can
+            actually use. that includes the interface, api, database,
+            deployment, and the awkward bits between them. you can see some of
+            that work in{" "}
             <Link href="/projects" className="link-underline">
               /projects
             </Link>
-            , and if you&apos;d like to chat, the address is{" "}
-            <a href="mailto:adzapesolomon@gmail.com" className="link-underline">
+            . if you&apos;d like to talk, email me at{" "}
+            <a
+              href="mailto:adzapesolomon@gmail.com"
+              className="link-underline break-all"
+            >
               adzapesolomon@gmail.com
             </a>
             .
@@ -135,26 +118,47 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      <Section label="currently">
+        <dl className="space-y-5">
+          <div className="grid gap-2 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-6">
+            <dt className="label-mono normal-case tracking-[0.04em] text-(--color-ink-soft)">
+              learning
+            </dt>
+            <dd>system design, motion design</dd>
+          </div>
+          <div className="grid gap-2 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-6">
+            <dt className="label-mono normal-case tracking-[0.04em] text-(--color-ink-soft)">
+              building
+            </dt>
+            <dd>shell</dd>
+          </div>
+        </dl>
+      </Section>
+
       <Section label="work">
-        <ol className="space-y-10">
-          {JOBS.map((job) => (
+        <ol className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {JOBS.map((job, index) => (
             <li
               key={job.company}
-              className="group grid gap-x-8 gap-y-3 sm:grid-cols-[6rem_minmax(0,1fr)] sm:items-center"
+              style={{ "--experience-color": job.color } as React.CSSProperties}
+              className="experience-card flex min-h-[23rem] flex-col rounded-[14px] border border-(--color-rule) p-5"
             >
-              <span
-                className={
-                  "inline-flex items-center justify-center grayscale opacity-80 max-lg:grayscale-0 max-lg:opacity-100 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100 " +
-                  (job.bigLogo ? "h-24 w-24 p-1.5 " : "h-16 w-16 ") +
-                  (job.darkBackdrop ? "logo-on-dark " : "")
-                }
-              >
+              <div className="flex items-start justify-between gap-4">
+                <span className="text-[0.73rem] uppercase tracking-[0.055em] text-white/65 tabular-nums">
+                  {job.start} — {job.end}
+                </span>
+                <span className="font-mono text-[0.72rem] text-white/55">
+                  0{index + 1}
+                </span>
+              </div>
+
+              <span className="mx-auto my-5 inline-flex h-[8.5rem] w-[8.5rem] items-center justify-center p-1">
                 {job.logo ? (
                   <Image
                     src={job.logo}
                     alt=""
-                    width={96}
-                    height={96}
+                    width={160}
+                    height={160}
                     className="block h-full w-full object-contain"
                   />
                 ) : (
@@ -166,11 +170,8 @@ export default function AboutPage() {
                   </span>
                 )}
               </span>
-              <div className="space-y-2 max-w-[60ch]">
-                <div className="font-mono text-[0.78rem] uppercase tracking-[0.06em] text-(--color-ink-soft) tabular-nums">
-                  {job.start} — {job.end}
-                </div>
-                <h3 className="font-display text-2xl text-(--color-ink) leading-tight">
+              <div className="mt-auto space-y-3">
+                <h3 className="font-display text-[1.45rem] text-white leading-tight tracking-[-0.02em]">
                   {job.href ? (
                     <a
                       href={job.href}
@@ -183,11 +184,11 @@ export default function AboutPage() {
                   ) : (
                     job.company
                   )}{" "}
-                  <span className="text-(--color-ink-soft) font-body text-base italic">
-                    · {job.role}
-                  </span>
                 </h3>
-                <p className="text-(--color-ink-soft) leading-relaxed">
+                <p className="text-[0.75rem] uppercase tracking-[0.055em] text-white/65">
+                  {job.role}
+                </p>
+                <p className="text-[0.9rem] text-white/75 leading-relaxed">
                   {job.blurb}
                 </p>
               </div>
@@ -197,30 +198,7 @@ export default function AboutPage() {
       </Section>
 
       <Section label="tools">
-        <dl className="space-y-4 max-w-[64ch]">
-          {SKILLS.map((row) => (
-            <div
-              key={row.label}
-              className="grid grid-cols-1 sm:grid-cols-[5rem_minmax(0,1fr)] gap-x-6 gap-y-1.5 items-baseline"
-            >
-              <dt className="font-mono text-[0.72rem] uppercase tracking-[0.08em] text-(--color-ink-soft)">
-                {row.label}
-              </dt>
-              <dd className="flex flex-wrap gap-x-4 gap-y-1.5 text-(--color-ink)">
-                {row.items.map((it, i) => (
-                  <span key={it} className="inline-flex items-baseline gap-3">
-                    <span>{it}</span>
-                    {i < row.items.length - 1 && (
-                      <span aria-hidden="true" className="text-(--color-rule)">
-                        ·
-                      </span>
-                    )}
-                  </span>
-                ))}
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <ToolChipGrid />
       </Section>
     </SiteShell>
   );

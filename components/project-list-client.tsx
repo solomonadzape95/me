@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { MagnifyingGlass, X } from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-import { ProjectMark } from "./project-mark";
-import { ThumbPreview, type Preview } from "./thumb-preview";
+import { ProjectCard } from "./project-card";
 
 export type ProjectListItem = {
   slug: string;
@@ -14,87 +14,147 @@ export type ProjectListItem = {
   status?: string;
   logo?: string;
   stack: string[];
+  github?: string;
+  website?: string;
   thumb?: string;
 };
 
 type Props = {
   projects: ProjectListItem[];
+  initialType?: ProjectType;
 };
 
-export const ProjectListClient = ({ projects }: Props) => {
-  const [preview, setPreview] = useState<Preview | null>(null);
-  const [canHover, setCanHover] = useState(false);
+type ProjectType = "web" | "desktop" | "extension" | "onchain";
+
+const matchesType = (project: ProjectListItem, type?: ProjectType) => {
+  if (!type) return true;
+  const stack = project.stack.map((item) => item.toLowerCase());
+  const description = project.description.toLowerCase();
+  const isDesktop =
+    stack.some((item) => item.includes("tauri") || item.includes("electron")) ||
+    description.includes("desktop");
+  const isExtension =
+    stack.some(
+      (item) => item.includes("plasmo") || item.includes("chrome ext"),
+    ) || description.includes("extension");
+  const isOnchain =
+    stack.some((item) =>
+      [
+        "soroban",
+        "stellar",
+        "solana",
+        "anchor",
+        "sui",
+        "walrus",
+        "wagmi",
+        "viem",
+        "celo",
+        "web3",
+      ].some((token) => item.includes(token)),
+    ) || description.includes("onchain");
+
+  if (type === "desktop") return isDesktop;
+  if (type === "extension") return isExtension;
+  if (type === "onchain") return isOnchain;
+  return (
+    !isDesktop &&
+    (stack.some((item) =>
+      ["next", "react", "vite", "plasmo", "html"].some((token) =>
+        item.includes(token),
+      ),
+    ) ||
+      description.includes("browser") ||
+      description.includes("web"))
+  );
+};
+
+export const ProjectListClient = ({ projects, initialType }: Props) => {
+  const router = useRouter();
+  const [query, setQuery] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+  const filtered = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    return projects.filter((project) => {
+      if (!matchesType(project, initialType)) return false;
+      if (!normalized) return true;
+      return [
+        project.name,
+        project.description,
+        project.status,
+        project.year,
+        ...project.stack,
+      ]
+        .filter(Boolean)
+        .some((value) => value?.toLowerCase().includes(normalized));
+    });
+  }, [initialType, projects, query]);
 
   useEffect(() => {
-    const mq = window.matchMedia("(hover: hover) and (min-width: 1024px)");
-    const apply = () => setCanHover(mq.matches);
-    apply();
-    mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
+    if (new URLSearchParams(window.location.search).get("focus") === "search") {
+      inputRef.current?.focus();
+    }
   }, []);
 
-  const onMove = useCallback(
-    (e: React.MouseEvent, slug: string, src?: string) => {
-      if (!canHover || !src) return;
-      setPreview({ slug, src, x: e.clientX, y: e.clientY });
-    },
-    [canHover],
-  );
-  const onLeave = useCallback(() => setPreview(null), []);
-
   return (
-    <>
-      <ol className="space-y-1">
-        {projects.map((p) => (
-          <li key={p.slug}>
-            <Link
-              href={`/projects/${p.slug}`}
-              onMouseEnter={(e) => onMove(e, p.slug, p.thumb)}
-              onMouseMove={(e) => onMove(e, p.slug, p.thumb)}
-              onMouseLeave={onLeave}
-              className="group grid grid-cols-[3rem_minmax(0,1fr)] gap-x-5 py-5 items-start transition-colors duration-150"
+    <div className="space-y-7">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <label className="relative block w-full max-w-xl">
+          <span className="sr-only">search projects</span>
+          <MagnifyingGlass
+            size={19}
+            weight="duotone"
+            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-(--color-ink-soft)"
+            aria-hidden="true"
+          />
+          <input
+            ref={inputRef}
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="search projects"
+            className="w-full rounded-[10px] border border-(--color-rule) bg-transparent py-3.5 pl-12 pr-12 text-[0.95rem] text-(--color-ink) outline-none transition-colors placeholder:text-(--color-ink-soft) focus:border-(--color-accent)"
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => {
+                setQuery("");
+                inputRef.current?.focus();
+              }}
+              aria-label="clear search"
+              className="absolute right-3 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center text-(--color-ink-soft) hover:text-(--color-accent)"
             >
-              <ProjectMark name={p.name} slug={p.slug} logo={p.logo} size={48} />
-              <div className="min-w-0 space-y-2">
-                <div className="flex items-baseline justify-between gap-3">
-                  <span className="font-display text-2xl leading-tight text-(--color-ink) group-hover:text-(--color-accent) transition-colors duration-150">
-                    {p.name}
-                  </span>
-                  <span className="label-mono tabular-nums shrink-0">
-                    {[p.status?.replace("-", " "), p.year]
-                      .filter(Boolean)
-                      .join(" · ")}
-                  </span>
-                </div>
-                <p className="text-(--color-ink-soft) text-[0.92rem] leading-relaxed">
-                  {p.description}
-                </p>
-                {p.stack.length > 0 && (
-                  <ul className="flex flex-wrap items-baseline gap-x-2 gap-y-1 label-mono normal-case tracking-[0.04em]">
-                    {p.stack.slice(0, 6).map((tag, i, arr) => (
-                      <li
-                        key={tag}
-                        className="inline-flex items-baseline gap-2"
-                      >
-                        <span>{tag}</span>
-                        {i < arr.length - 1 && (
-                          <span
-                            aria-hidden="true"
-                            className="text-(--color-rule)"
-                          >
-                            ·
-                          </span>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ol>
-      <ThumbPreview preview={preview} />
-    </>
+              <X size={15} weight="bold" />
+            </button>
+          )}
+        </label>
+        {initialType && (
+          <div className="flex shrink-0 items-center gap-3 text-[0.88rem] text-(--color-ink-soft)">
+            <span>showing {initialType} projects</span>
+            <button
+              type="button"
+              onClick={() => router.replace("/projects")}
+              className="link-underline text-(--color-ink)"
+            >
+              clear
+            </button>
+          </div>
+        )}
+      </div>
+
+      {filtered.length ? (
+        <ol className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          {filtered.map((project) => (
+            <li key={project.slug}>
+              <ProjectCard project={project} />
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p className="py-10 text-(--color-ink-soft)">
+          no projects match “{query}”.
+        </p>
+      )}
+    </div>
   );
 };

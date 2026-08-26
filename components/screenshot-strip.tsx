@@ -1,5 +1,6 @@
 "use client";
 
+import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -82,7 +83,7 @@ export const ScreenshotStrip = ({ images, name }: Props) => {
   if (images.length === 0) return null;
 
   return (
-    <div className="mt-2 mb-4 space-y-4 sm:mt-4 sm:mb-8">
+    <div className="space-y-3 sm:space-y-4">
       <div className="flex items-baseline justify-end gap-3 label-mono">
         <button
           type="button"
@@ -91,7 +92,7 @@ export const ScreenshotStrip = ({ images, name }: Props) => {
           aria-label="scroll left"
           className="px-2 py-1 border border-(--color-rule) hover:border-(--color-accent) hover:text-(--color-accent) disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-150"
         >
-          ←
+          <CaretLeft size={17} weight="bold" aria-hidden="true" />
         </button>
         <button
           type="button"
@@ -100,7 +101,7 @@ export const ScreenshotStrip = ({ images, name }: Props) => {
           aria-label="scroll right"
           className="px-2 py-1 border border-(--color-rule) hover:border-(--color-accent) hover:text-(--color-accent) disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-150"
         >
-          →
+          <CaretRight size={17} weight="bold" aria-hidden="true" />
         </button>
       </div>
       <div
@@ -112,20 +113,20 @@ export const ScreenshotStrip = ({ images, name }: Props) => {
         onPointerCancel={endDrag}
         className="scroll-strip overflow-x-auto"
       >
-        <ul className="flex gap-3 pr-12 pb-3">
+        <ul className="flex gap-4 pb-3 pr-12 sm:gap-5">
           {images.map((src, i) => (
             <li
               key={src}
-              className="shrink-0 h-72 lg:h-[26rem] aspect-[16/10]"
+              className="aspect-[16/10] w-[calc(100vw-3rem)] max-w-[46rem] shrink-0 lg:w-[min(64rem,calc(100vw-25rem))] lg:max-w-none"
             >
-              <figure className="h-full w-full overflow-hidden bg-(--color-paper)">
+              <figure className="h-full w-full overflow-hidden">
                 <Image
                   src={src}
                   alt={`${name} screenshot ${i + 1}`}
                   width={2400}
                   height={1500}
                   draggable={false}
-                  sizes="(min-width: 1024px) 42rem, 70vw"
+                  sizes="(min-width: 1024px) min(64rem, calc(100vw - 25rem)), (min-width: 640px) min(46rem, calc(100vw - 3rem)), calc(100vw - 3rem)"
                   className="block h-full w-full object-contain select-none"
                   priority={i === 0}
                 />

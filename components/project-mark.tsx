@@ -1,6 +1,5 @@
+import { Fingerprint, PenNib, Stack } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
-
-import { Identicon } from "./identicon";
 
 type Props = {
   name: string;
@@ -27,7 +26,32 @@ export const ProjectMark = ({
   className,
 }: Props) => {
   const seed = slug ?? name;
-  const inner = logo ? (
+  const inner = seed === "echo" ? (
+    <Fingerprint
+      size={Math.round(size * 0.9)}
+      weight="duotone"
+      color="#46d7d0"
+      aria-hidden="true"
+    />
+  ) : seed === "jotter" ? (
+    <PenNib
+      size={Math.round(size * 0.82)}
+      weight="duotone"
+      color="#ef9368"
+      aria-hidden="true"
+    />
+  ) : seed === "rizzlr" && logo ? (
+    <span className="relative block h-full w-full overflow-hidden rounded-full bg-[#efd0aa]">
+      <Image
+        src={logo}
+        alt=""
+        width={size}
+        height={size}
+        className="block h-full w-full object-contain"
+        unoptimized
+      />
+    </span>
+  ) : logo ? (
     <Image
       src={logo}
       alt=""
@@ -37,7 +61,12 @@ export const ProjectMark = ({
       unoptimized={logo.endsWith(".svg")}
     />
   ) : (
-    <Identicon seed={seed} size={size} />
+    <Stack
+      size={Math.round(size * 0.82)}
+      weight="duotone"
+      color={seed === "flipit" ? "#5fc8ff" : seed === "lisk" ? "#55d99b" : "#d9b36c"}
+      aria-hidden="true"
+    />
   );
   const filterClasses = colorful
     ? "opacity-100"

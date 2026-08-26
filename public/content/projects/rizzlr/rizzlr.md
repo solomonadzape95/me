@@ -1,7 +1,7 @@
 ---
 published: true
 name: rizzlr
-description: a voice-first dating-game ui powered by elevenlabs, with optional solana sol escrow for pvp challenges.
+description: a voice-first dating game with an ai host and optional solana stakes for player challenges.
 logo: logo.svg
 thumbnail: thumb.png
 images: [shot-1.png, shot-2.png, shot-3.png, shot-4.png, shot-5.png]
@@ -11,11 +11,10 @@ website: rizzlr.xyz
 date: 2026-01-01
 status: in-progress
 ---
-## stack
-next.js, react 19, elevenlabs conversational ai (websocket / webrtc), solana web3.js, anchor (escrow program), supabase (profiles + sessions), tailwind, radix
+## overview
 
-## about
-rizzlr is a voice-first dating game. players have spoken rounds against an AI host, with optional pvp challenges backed by a small SOL escrow contract written in anchor. wallet auth is via solana wallet adapter; profiles and sessions live in supabase.
+rizzlr is a voice-first dating game built with simplex-t. players take part in spoken rounds with an ai host, then can challenge each other with an optional sol stake.
 
-## notes
-collaboration with simplex-t. the on-chain piece is intentionally small — the game is the experience, the escrow is the stake.
+## how it works
+
+elevenlabs runs the voice session, supabase stores profiles and rounds, and solana wallet adapter handles sign-in. the anchor contract only holds the challenge stake; the game remains the main experience.

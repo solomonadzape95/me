@@ -1,14 +1,15 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
-import { CascadeName } from "@/components/cascade-name";
-import { ProjectMark } from "@/components/project-mark";
+import { Avatar } from "@/components/avatar";
+import { IntroCopy } from "@/components/intro-copy";
+import { ProjectCard } from "@/components/project-card";
 import { Section, SiteShell } from "@/components/site-shell";
 import { getAllProjects } from "@/lib/projects";
 
-// Hand-curated — all four have real logo files in their content folder so
+// Hand-curated — all three have real logo files in their content folder so
 // the home page never falls back to identicons.
-const SELECTED_SLUGS = ["kai", "nebula", "crypt", "aria"];
+const SELECTED_SLUGS = ["kai", "nebula", "crypt"];
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -23,86 +24,40 @@ export default async function HomePage() {
 
   return (
     <SiteShell>
-      <header className="space-y-6">
-        <h1 className="font-display font-light leading-[0.95] tracking-tight text-(--color-ink) text-[clamp(2.5rem,7vw,4.75rem)] break-words">
-          <CascadeName text="Solomon Adzape" nickname="solenoid" />
-        </h1>
-        <div className="max-w-[66ch] lg:max-w-none space-y-2 leading-relaxed">
-          <p className="text-(--color-ink) text-lg lg:whitespace-nowrap">
-            Software engineer building beautiful, functional experiences.
-          </p>
-          <p className="text-(--color-ink-soft) max-w-[66ch]">
-            I work across AI, desktop, and financial products—from interaction
-            design through systems, integrations, and deployment.
-          </p>
-        </div>
-      </header>
+      <div className="flex flex-col gap-20 lg:gap-24">
+        <header className="space-y-6">
+          <h1 className="page-title flex max-w-[28ch] flex-wrap items-center gap-x-[0.28em] gap-y-2">
+            <span>hey there, i&apos;m</span>
+            <span className="inline-flex items-center gap-[0.2em] whitespace-nowrap">
+              <Avatar size={44} className="-rotate-6" />
+              solomon.
+            </span>
+          </h1>
+          <IntroCopy />
+        </header>
 
-      <Section label="selected work">
-        <ol className="space-y-2">
-          {selected.map((p) => (
-            <li key={p.slug}>
-              <Link
-                href={`/projects/${p.slug}`}
-                className="group grid grid-cols-[3rem_minmax(0,1fr)] gap-x-5 py-5 items-start transition-colors duration-150"
-              >
-                <ProjectMark
-                  name={p.name}
-                  slug={p.slug}
-                  logo={p.logo}
-                  size={48}
-                />
-                <div className="min-w-0 space-y-2">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <span className="font-display text-2xl leading-tight text-(--color-ink) group-hover:text-(--color-accent) transition-colors duration-150">
-                      {p.name}
-                    </span>
-                    <span className="label-mono tabular-nums shrink-0">
-                      {[p.status?.replace("-", " "), p.year]
-                        .filter(Boolean)
-                        .join(" · ")}
-                    </span>
-                  </div>
-                  <p className="text-(--color-ink-soft) text-[0.92rem] leading-relaxed">
-                    {p.description}
-                  </p>
-                  {p.stack.length > 0 && (
-                    <ul className="flex flex-wrap items-baseline gap-x-2 gap-y-1 label-mono normal-case tracking-[0.04em]">
-                      {p.stack.slice(0, 5).map((tag, i, arr) => (
-                        <li
-                          key={tag}
-                          className="inline-flex items-baseline gap-2"
-                        >
-                          <span>{tag}</span>
-                          {i < arr.length - 1 && (
-                            <span
-                              aria-hidden="true"
-                              className="text-(--color-rule)"
-                            >
-                              ·
-                            </span>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ol>
-        <div className="pt-2">
+        <Section
+          label="side projects"
+          action={
           <Link
             href="/projects"
             className="label-mono link-underline normal-case tracking-[0.06em]"
           >
-            full index
+            view all projects
           </Link>
-        </div>
-      </Section>
+          }
+        >
+          <ol className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            {selected.map((p) => (
+              <li key={p.slug}>
+                <ProjectCard project={p} />
+              </li>
+            ))}
+          </ol>
+        </Section>
 
-      <Section label="elsewhere">
-        <ul className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-6 gap-y-2 text-[0.92rem]">
+        <Section label="find me online">
+          <ul className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-6 gap-y-2 text-[0.92rem]">
           <li className="text-(--color-ink-soft)">github</li>
           <li>
             <a
@@ -133,7 +88,7 @@ export default async function HomePage() {
               rel="noreferrer"
               className="link-underline"
             >
-              @0xsolenoid
+              0xsolenoid
             </a>
           </li>
           <li className="text-(--color-ink-soft)">mail</li>
@@ -142,8 +97,31 @@ export default async function HomePage() {
               adzapesolomon@gmail.com
             </a>
           </li>
-        </ul>
-      </Section>
+          <li className="text-(--color-ink-soft)">instagram</li>
+          <li>
+            <a
+              href="https://www.instagram.com/0xsolenoid/"
+              target="_blank"
+              rel="noreferrer"
+              className="link-underline"
+            >
+              0xsolenoid
+            </a>
+          </li>
+          <li className="text-(--color-ink-soft)">discord</li>
+          <li>
+            <a
+              href="https://discordapp.com/users/0xsolenoid"
+              target="_blank"
+              rel="noreferrer"
+              className="link-underline"
+            >
+              0xsolenoid
+            </a>
+          </li>
+          </ul>
+        </Section>
+      </div>
     </SiteShell>
   );
 }
