@@ -18,6 +18,7 @@ const CHANGES = [
       "rebuilt project and experience cards",
       "added light and dark themes, display controls, and command search",
       "added live listening, a lagos map, project search, blog, and videos",
+      "added private, privacy-minded site analytics",
       "rewrote the introduction and added the story behind solenoid",
       "added this changelog and a colophon",
     ],

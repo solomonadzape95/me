@@ -5,11 +5,14 @@ import Script from "next/script";
 import "./globals.css";
 
 import { CommandPaletteMount } from "@/components/command-palette-mount";
+import { AnalyticsTracker } from "@/components/analytics-tracker";
 import { MobileNav } from "@/components/mobile-nav";
 import { NowPlayingProvider } from "@/components/now-playing";
 import { RouteAnimator } from "@/components/route-animator";
 import { SiteRail } from "@/components/site-rail";
+import { StatsPeek } from "@/components/stats-peek";
 import { ThemeBootstrap } from "@/components/theme-bootstrap";
+import { UMAMI_WEBSITE_ID } from "@/lib/analytics";
 
 const selera = localFont({
   src: "../public/fonts/selera-regular.ttf",
@@ -165,11 +168,13 @@ export default function RootLayout({
             </div>
           </div>
           <MobileNav />
+          <StatsPeek />
+          <AnalyticsTracker />
           <CommandPaletteMount />
         </NowPlayingProvider>
         <Script
           src="https://cloud.umami.is/script.js"
-          data-website-id="eec0ba25-604f-4991-ab62-eb9a1c7446f1"
+          data-website-id={UMAMI_WEBSITE_ID}
           strategy="afterInteractive"
         />
       </body>

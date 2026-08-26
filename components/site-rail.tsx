@@ -39,7 +39,7 @@ export const SiteRail = () => {
         </Link>
       </div>
 
-      <nav aria-label="primary" className="space-y-1.5 border-b border-(--color-rule) pb-4 text-[0.9rem]">
+      <nav aria-label="primary" className="space-y-1 border-b border-(--color-rule) pb-4 text-[0.9rem]">
         {NAV.map((item) => {
           const active = isActive(pathname, item.href);
           return (

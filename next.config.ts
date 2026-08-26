@@ -11,6 +11,15 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "is*-ssl.mzstatic.com" },
     ],
   },
+  skipTrailingSlashRedirect: true,
+  async rewrites() {
+    return [
+      {
+        source: "/ingest/:path*",
+        destination: "https://us.i.posthog.com/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
