@@ -7,8 +7,7 @@ import { ProjectCard } from "@/components/project-card";
 import { Section, SiteShell } from "@/components/site-shell";
 import { getAllProjects } from "@/lib/projects";
 
-// Hand-curated — all three have real logo files in their content folder so
-// the home page never falls back to identicons.
+// Hand-curated — all three have real logo files in their content folders.
 const SELECTED_SLUGS = ["kai", "nebula", "crypt"];
 
 export const metadata: Metadata = {

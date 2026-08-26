@@ -156,7 +156,7 @@ export default function RootLayout({
             <div className="relative">
               {/* Rail is desktop-only. On smaller viewports MobileNav renders
                   the floating buttons + drawer instead. */}
-              <aside className="hidden lg:block lg:fixed lg:left-16 lg:top-2 lg:w-56">
+              <aside className="hidden lg:block lg:fixed lg:left-16 lg:top-6 lg:w-56">
                 <SiteRail />
               </aside>
               <main className="min-w-0 lg:ml-[17.5rem]">

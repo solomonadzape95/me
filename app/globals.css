@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* -----------------------------------------------------------------------------
-   Design tokens — see .impeccable.md for the rationale behind every choice.
+   Design tokens.
    ---------------------------------------------------------------------------*/
 
 @theme {
@@ -148,101 +148,6 @@ a {
 
 .rail-link[aria-current="page"] {
   color: var(--color-accent) !important;
-}
-
-/* -----------------------------------------------------------------------------
-   Display-name cascade — the one signature moment.
-   Each character is a <span> with an inline --i index. Reduced-motion
-   visitors get the final state immediately.
-   ---------------------------------------------------------------------------*/
-
-@keyframes name-cascade {
-  from {
-    color: var(--color-rule);
-    transform: translateY(0.06em);
-    opacity: 0.4;
-  }
-  to {
-    color: var(--color-ink);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.cn-char,
-.cn-prefix,
-.cn-out-char {
-  display: inline-block;
-  color: var(--color-ink);
-  animation: name-cascade 520ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
-  animation-delay: calc(var(--i, 0) * 28ms);
-  will-change: color, transform, opacity;
-}
-
-/* Visible word break — the natural space-character glyph in inline-block
-   collapses, so we widen it explicitly. */
-[data-cn-space="true"] {
-  width: 0.32em;
-  margin: 0 0.05em;
-}
-
-/* Prefix smoothly tints to accent when the nickname is active. At rest it sits
-   one notch off the rest of the name — lighter in light mode, slightly
-   darker in dark — to invite interaction. */
-.cn-prefix {
-  color: color-mix(in oklab, var(--color-ink) 70%, var(--color-paper));
-  transition: color 260ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-.cascade-name.is-nickname-active .cn-prefix {
-  color: var(--color-accent);
-}
-
-/* Tail letters of the original name cascade up and out on activation, with a
-   per-letter delay so they leave left-to-right. */
-.cn-out-char {
-  transition:
-    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 260ms cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: calc(var(--i, 0) * 30ms);
-}
-.cascade-name.is-nickname-active .cn-out-char {
-  opacity: 0;
-  transform: translateY(-0.4em);
-}
-
-/* Nickname tail starts off-stage and rises in on activation, also staggered. */
-.cn-in-char {
-  display: inline-block;
-  color: var(--color-accent);
-  opacity: 0;
-  transform: translateY(0.45em);
-  transition:
-    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 260ms cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: calc(var(--i, 0) * 30ms);
-  will-change: transform, opacity;
-}
-.cascade-name.is-nickname-active .cn-in-char {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cn-char,
-  .cn-prefix,
-  .cn-out-char,
-  .cn-in-char {
-    animation: none;
-    transition: none;
-  }
-  .cascade-name.is-nickname-active .cn-out-char {
-    opacity: 0;
-    transform: none;
-  }
-  .cascade-name.is-nickname-active .cn-in-char {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 /* -----------------------------------------------------------------------------

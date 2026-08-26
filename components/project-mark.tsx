@@ -11,11 +11,9 @@ type Props = {
 };
 
 /**
- * The visual mark for a project — a real logo if one exists, otherwise a
- * monochrome DiceBear identicon. By default the mark renders desaturated
- * and partially transparent; the closest `.group` ancestor restores
- * saturation on hover/focus. `colorful` skips the desaturate filter — used
- * on the project detail page where there's no row-hover concept.
+ * The visual mark for a project — a real logo when available, with a small
+ * set of intentional Phosphor fallbacks. `colorful` skips the desaturate
+ * filter used by quieter list treatments.
  */
 export const ProjectMark = ({
   name,
