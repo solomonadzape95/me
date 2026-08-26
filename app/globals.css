@@ -141,6 +141,10 @@ a {
   text-decoration: none;
 }
 
+a[href] {
+  cursor: pointer;
+}
+
 .rail-link:hover,
 .rail-link:focus-visible {
   color: var(--color-accent);

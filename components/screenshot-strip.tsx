@@ -13,8 +13,8 @@ type Props = {
  * Horizontal scrolling gallery for a project's screenshots. The strip
  * extends past the parent column's right edge (using `width: calc(100vw -
  * --rail-and-pad)`) so it spills into the gutter the map used to occupy.
- * Mouse wheel scrolls horizontally; drag-to-scroll works for mouse users
- * too; prev/next buttons advance by ~85% of the visible width.
+ * Drag-to-scroll works for mouse users; prev/next buttons advance by ~85%
+ * of the visible width. Vertical wheel input is left to the page.
  */
 export const ScreenshotStrip = ({ images, name }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -45,16 +45,6 @@ export const ScreenshotStrip = ({ images, name }: Props) => {
     const el = ref.current;
     if (!el) return;
     el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: "smooth" });
-  };
-
-  const onWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    // If the user is scrolling vertically, translate to horizontal.
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      el.scrollLeft += e.deltaY;
-      e.preventDefault();
-    }
   };
 
   const dragState = useRef<{ x: number; sl: number; active: boolean }>({
@@ -106,7 +96,6 @@ export const ScreenshotStrip = ({ images, name }: Props) => {
       </div>
       <div
         ref={ref}
-        onWheel={onWheel}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
