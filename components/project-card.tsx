@@ -30,6 +30,7 @@ const PROJECT_COLORS: Record<string, string> = {
   envelope: "#71462f",
   flipit: "#68412f",
   gauntlet: "#443766",
+  "gauntlet-base": "#4f5100",
   gdg: "#343941",
   jotter: "#32465a",
   kai: "#4d5935",
