@@ -7,7 +7,7 @@ logo: logo.svg
 images: [shot-1.webp, shot-2.webp]
 stack: [sui, walrus, tatum]
 github: github.com/solomonadzape95/gauntlet
-website: https://gauntlet.thesolenoid.space
+website: https://thegauntlet.thesolenoid.space
 date: 2026-07-01
 status: archived
 ---

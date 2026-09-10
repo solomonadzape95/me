@@ -3,9 +3,10 @@ published: true
 name: gauntlet — draft2own
 description: a fantasy-stock game where players draft a virtual lineup, battle friends, and can own a small real version on Base.
 logo: logo.png
-thumbnail: thumb.jpg
-images: [shot-1.jpg, shot-2.jpg, shot-3.jpg, shot-4.jpg, shot-5.jpg]
+thumbnail: thumb.png
+images: [shot-1.png, shot-2.png, shot-3.png, shot-4.png]
 stack: [next.js, typescript, base, viem, chainlink, 0x, supabase]
+website: https://gauntlet.thesolenoid.space
 github: github.com/solomonadzape95/gauntlet-base
 date: 2026-09-09
 status: in-progress
