@@ -10,7 +10,6 @@ import { MobileNav } from "@/components/mobile-nav";
 import { NowPlayingProvider } from "@/components/now-playing";
 import { RouteAnimator } from "@/components/route-animator";
 import { SiteRail } from "@/components/site-rail";
-import { StatsPeek } from "@/components/stats-peek";
 import { ThemeBootstrap } from "@/components/theme-bootstrap";
 import { UMAMI_WEBSITE_ID } from "@/lib/analytics";
 
@@ -168,7 +167,6 @@ export default function RootLayout({
             </div>
           </div>
           <MobileNav />
-          <StatsPeek />
           <AnalyticsTracker />
           <CommandPaletteMount />
         </NowPlayingProvider>

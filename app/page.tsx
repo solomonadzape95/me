@@ -7,8 +7,8 @@ import { ProjectCard } from "@/components/project-card";
 import { Section, SiteShell } from "@/components/site-shell";
 import { getAllProjects } from "@/lib/projects";
 
-// Hand-curated — all three have real logo files in their content folders.
-const SELECTED_SLUGS = ["kai", "nebula", "crypt"];
+// Hand-curated — all four have real logo files in their content folders.
+const SELECTED_SLUGS = ["offhrs", "kai", "nebula", "crypt"];
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -46,7 +46,7 @@ export default async function HomePage() {
           </Link>
           }
         >
-          <ol className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          <ol className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {selected.map((p) => (
               <li key={p.slug}>
                 <ProjectCard project={p} />

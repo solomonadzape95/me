@@ -37,6 +37,7 @@ const PROJECT_COLORS: Record<string, string> = {
   lexis: "#684536",
   lisk: "#4b374f",
   nebula: "#52374f",
+  offhrs: "#17364a",
   practice: "#4e5832",
   rizzlr: "#28545a",
 };

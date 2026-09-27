@@ -13,7 +13,7 @@ pnpm install
 pnpm dev
 ```
 
-Project content lives in `public/content/projects`. Last.fm uses `LASTFM_API_KEY` and `LASTFM_USERNAME`; analytics use the Umami website ID plus the PostHog variables listed in `.env.example`. Set `STATS_PASSWORD` to protect the private dashboard.
+Project content lives in `public/content/projects`. Last.fm uses `LASTFM_API_KEY` and `LASTFM_USERNAME`; analytics use the Umami website ID and public PostHog key listed in `.env.example`.
 
 ```bash
 pnpm typecheck
