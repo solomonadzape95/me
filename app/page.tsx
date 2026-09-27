@@ -5,6 +5,7 @@ import { Avatar } from "@/components/avatar";
 import { IntroCopy } from "@/components/intro-copy";
 import { ProjectCard } from "@/components/project-card";
 import { Section, SiteShell } from "@/components/site-shell";
+import { SocialLinks } from "@/components/social-links";
 import { getAllProjects } from "@/lib/projects";
 
 // Hand-curated — all four have real logo files in their content folders.
@@ -56,69 +57,7 @@ export default async function HomePage() {
         </Section>
 
         <Section label="find me online">
-          <ul className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-6 gap-y-2 text-[0.92rem]">
-          <li className="text-(--color-ink-soft)">github</li>
-          <li>
-            <a
-              href="https://github.com/solomonadzape95"
-              target="_blank"
-              rel="noreferrer"
-              className="link-underline"
-            >
-              solomonadzape95
-            </a>
-          </li>
-          <li className="text-(--color-ink-soft)">linkedin</li>
-          <li>
-            <a
-              href="https://www.linkedin.com/in/solomonadzape/"
-              target="_blank"
-              rel="noreferrer"
-              className="link-underline"
-            >
-              solomonadzape
-            </a>
-          </li>
-          <li className="text-(--color-ink-soft)">x</li>
-          <li>
-            <a
-              href="https://x.com/0xsolenoid"
-              target="_blank"
-              rel="noreferrer"
-              className="link-underline"
-            >
-              0xsolenoid
-            </a>
-          </li>
-          <li className="text-(--color-ink-soft)">mail</li>
-          <li>
-            <a href="mailto:adzapesolomon@gmail.com" className="link-underline">
-              adzapesolomon@gmail.com
-            </a>
-          </li>
-          <li className="text-(--color-ink-soft)">instagram</li>
-          <li>
-            <a
-              href="https://www.instagram.com/0xsolenoid/"
-              target="_blank"
-              rel="noreferrer"
-              className="link-underline"
-            >
-              0xsolenoid
-            </a>
-          </li>
-          <li className="text-(--color-ink-soft)">discord</li>
-          <li>
-            <a
-              href="https://discordapp.com/users/0xsolenoid"
-              target="_blank"
-              rel="noreferrer"
-              className="link-underline"
-            >
-              0xsolenoid
-            </a>
-          </li>
-          </ul>
+          <SocialLinks />
         </Section>
       </div>
     </SiteShell>
