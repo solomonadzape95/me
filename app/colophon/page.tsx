@@ -50,8 +50,6 @@ const GROUPS: { label: string; items: Credit[] }[] = [
     items: [
       { name: "Phosphor Icons", note: "interface icons", href: "https://phosphoricons.com/" },
       { name: "React Icons", note: "technology brand marks from Simple Icons", href: "https://react-icons.github.io/react-icons/" },
-      { name: "Adobe", note: "After Effects and Illustrator product marks", href: "https://www.adobe.com/creativecloud.html" },
-      { name: "Cavalry", note: "official product mark", href: "https://cavalry.studio/" },
     ],
   },
   {
